@@ -102,8 +102,8 @@
 
                 <!-- Fila Botones -->
                 <div class="row g-3 justify-content-center mt-3">
-                    <button type="reset" class="btn btn-danger text-white fw-semibold w-25 mx-2" id ="formulario_registro_usuario" name="formulario_registro_usuario">Eliminar</button>
-                    <button type="submit" class="btn btn-primary text-white fw-semibold w-25 mx-2">Registrarse</button>
+                    <button type="reset" class="btn btn-danger text-white fw-semibold w-25 mx-2">Eliminar</button>
+                    <button type="submit" class="btn btn-primary text-white fw-semibold w-25 mx-2" id ="formulario_registro_usuario" name="formulario_registro_usuario">Registrarse</button>
                 </div>
                 
             </form>

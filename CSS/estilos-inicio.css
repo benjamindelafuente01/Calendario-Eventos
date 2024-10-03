@@ -1,0 +1,15 @@
+/* @media (max-width: 768px) {
+    .contenedor-calendario {
+      width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .contenedor-calendario {
+      width: 75%;
+    }
+} */
+
+.btn-close-white {
+    filter: invert(1);
+}

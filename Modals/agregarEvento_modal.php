@@ -71,4 +71,5 @@
 </div>
 
 <!-- Script para limpiar formulario -->
+<script src="../Action/sweetalert2.js"></script>
 <script src="../Action/validarModalCrearEvento.js"></script>

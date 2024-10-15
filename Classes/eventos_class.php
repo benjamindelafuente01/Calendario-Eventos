@@ -106,6 +106,28 @@
         }
 
 
+        // Método para eliminar un evento
+        public function eliminarEvento($id) {
+
+            // Sentencia SQL
+            $sql = "DELETE FROM eventos WHERE id = :ID";
+
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos parametros con bindParam
+            $stmt->bindParam(':ID', $id);
+
+            // Ejecutamos consulta
+            $stmt->execute();
+
+            // Verificamos resultado
+            $resultado = $stmt->rowCount() > 0 ? true : false;
+            
+            return $resultado;
+        }
+
+
     }
 
 ?>

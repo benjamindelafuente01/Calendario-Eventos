@@ -54,6 +54,12 @@ function mostrarEventos(data) {
     // Limpiamos contenedor (para dibujar de nuevo en caso de que se edite el color)
     contenedorEventos.innerHTML = "";
 
+    // Verificamos si existe eventos
+    if (data.length == 0) {
+        contenedorEventos.innerHTML = "No se han registrado eventos. Agregue uno para visualizarlos";
+        contenedorEventos.classList.add('mensaje-eventos-vacio', 'mt-4');
+    }
+
     // Obtenemos los datos de cada evento
     data.forEach(evento => {
         
@@ -233,9 +239,9 @@ function crearDropdown(id) {
     // opcionEliminar.setAttribute('data-bs-target', '#modalEditarEvento');
 
     // Evento al hacer clic en el 'li'
-    // opcionEliminar.addEventListener('click', function() {
-    //     datosEventoAEditar(id);
-    // });
+    opcionEliminar.addEventListener('click', function() {
+        eliminarEvento(id);
+    });
 
     // Imagen de eliminar
     let imagenEliminar = document.createElement('img');
@@ -260,4 +266,78 @@ function crearDropdown(id) {
 
 
     return dropdown;
+}
+
+
+/*
+    Función para eliminar un evento
+*/
+function eliminarEvento(id) {
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Eliminarás el evento con todos sus datos",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0B5ED7",
+        cancelButtonColor: "#BB2D3B",
+        confirmButtonText: "Eliminar evento",
+        cancelButtonText: "Cancelar"
+    
+    }).then((result) => {
+        
+        if (result.isConfirmed) {
+
+            // Hacer la solicitud fetch para enviar los datos al servidor
+            fetch('../Controllers/eliminarEvento_controller.php', {
+                // Valores de la peticion
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id })
+            })
+            .then(response => response.text()) // Leer la respuesta como texto
+            .then(data => {
+                console.log('Respuesta del servidor (antes de JSON):', data);
+                try {
+                    // Intentar convertir la respuesta a JSON
+                    let jsonData = JSON.parse(data);
+                
+                    // Procesar la respuesta del servidor
+                    if (jsonData.exito) {
+
+                        // Mensaje de exito
+                        Swal.fire({
+                            title: "¡Evento eliminado!",
+                            text: "El evento se ha eliminado correctamente",
+                            icon: "success",
+                            timer: 2000
+                        });
+
+                        // Recargamos los eventos
+                        traerEventos();
+
+                    } else {
+                        // Mensaje de error
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salió mal al eliminar el evento" + (jsonData.mensaje || 'Error desconocido'),
+                            timer: 2000
+                        });
+                    }
+
+                } catch (e) {
+                    console.error('Error al procesar JSON:', e);
+                    alert('Hubo un error al procesar la respuesta del servidor. Intenta nuevamente.');
+                }
+        
+            })
+            .catch(error => {
+                console.error('Error al enviar los datos:', error);
+                alert('Hubo un error al enviar los datos al servidor. Intenta nuevamente.');
+            });
+        }
+    });
 }

@@ -1,0 +1,88 @@
+.btn-close-white {
+    filter: invert(1);
+}
+
+
+/**********************************************************
+    Contenedor donde se van a ubicar todos los eventos    *
+**********************************************************/
+.contenedor-eventos {
+    width: 90%;
+    display: flex;                  /* Establecemos un contenedor flexible */
+    flex-wrap: wrap;                /* Hace que los elementos se envuelvan en una nueva línea si no caben */
+    justify-content: space-around;  /* Distribuye los elementos con espacio entre ellos */
+    margin: auto;
+}
+
+
+/**********************************************************
+*      Media queries para el tamaño de los eventos        *
+**********************************************************/
+@media (max-width: 768px) {
+    .contenedor-eventos-individual {
+        width: 45%;
+    }
+}
+
+@media (min-width: 768px) {
+    .contenedor-eventos-individual {
+        width: 30%;
+    }
+}
+
+
+/**********************************************************
+*                 Eventos y su contenido                  *
+**********************************************************/
+.contenedor-eventos-individual {
+    margin-top: 50px;
+    padding: 8px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8); /* Sombra oscura */
+}
+
+.imagen-opciones-evento {
+    filter: invert(1);
+    position: absolute;         /* Posiciona la etiqueta de forma absoluta con respecto al contenedor*/
+    top: 0%;
+    right: 0%;
+    margin: 10px;
+}
+
+.titulo-evento {
+    color: #ffff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.contenido-evento {
+    font-size: 1.2rem;
+}
+
+
+/**********************************************************
+*               Mensaje si no hay eventos                 *
+**********************************************************/
+.mensaje-eventos-vacio {
+    margin-top: 50px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/**********************************************************
+*                    Menu de opciones                     *
+**********************************************************/
+.dropdown-item {
+    display: flex;
+    align-items: center;    /* Alinea la imagen y el texto verticalmente */
+    cursor: pointer;        /* Cambia el cursor a una mano */
+    user-select: none;      /* Evita que se seleccione el texto */
+}
+
+.opciones-evento {
+    margin-right: 10px;
+    /* margin: 0; */
+    vertical-align: middle;  /* Alinea la imagen con el texto */
+}

@@ -75,6 +75,7 @@
 
     <!-- Script -->
     <script src="../BootStrap 5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="../Action/sweetalert2.js"></script>
     <script src="../Action/cargarEventos.js"></script>
 
     <?php

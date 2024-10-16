@@ -64,20 +64,24 @@ function mostrarEventos(data) {
     data.forEach(evento => {
         
         // ID del evento
-        let idEvento = evento.id.toString();
+        let idEvento = evento.id_evento.toString();
         // Nombre del evento
-        let nombreEvento = evento.title.toString();
+        let nombreEvento = evento.nombre.toString();
         // Fecha de inicio
-        let fechaInicio = evento.start;
-        // Calculamos el dinero recaudado
-        let dineroEvento = parseFloat(evento.precio_boleto) * parseInt(evento.boletos_vendidos);
+        let fechaInicio = evento.fecha_inicio;
         // Color del evento
         let colorEvento = evento.color.toString();
         // Boletos vendidos
-        let boletosVendidos = parseInt(evento.boletos_vendidos);
+        let boletosVendidos = 0;    // parseInt
+        // Ingresos
+        let ingresosEvento = 0;    // parseFloat()
+        // Gastos
+        let gastosEvento = 0       // parseFloat()
+        // Calculamos el dinero recaudado
+        let totalEvento =  ingresosEvento - gastosEvento;
 
         // Llamamos a la función para dibujar eventos de forma individual
-        let contenedorEvento = dibujarEvento(idEvento, nombreEvento, fechaInicio, dineroEvento, colorEvento, boletosVendidos);
+        let contenedorEvento = dibujarEvento(idEvento, nombreEvento, fechaInicio, colorEvento, boletosVendidos, ingresosEvento, gastosEvento, totalEvento);
 
         // Agregamos evento al contenedor
         contenedorEventos.appendChild(contenedorEvento);
@@ -89,20 +93,20 @@ function mostrarEventos(data) {
 /*
     Función para dibujar los eventos de forma individual
 */
-function dibujarEvento(id, nombre, fechaInicio, total, color, boletosVendidos) {
+function dibujarEvento(id, nombre, fechaInicio, color, boletosVendidos, ingresos, gastos, total) {
 
     // Variables para cada elemento del evento
-    // let imagenEditar;
-    let imagenOpciones;
     let contenedorEvento;
     let contenedorFechaInicio;
     let contenedorAsistentes;
+    let contenedorIngresos;
+    let contenedorGastos;
     let contenedorTotal;
     let contenedorGeneral;
     let dropdown;
     
 
-    // Contenedor general donde se guardaran todos los elemento
+    // Contenedor general donde se guardaran todos los elementos
     contenedorGeneral = document.createElement('div');
     contenedorGeneral.id = `evento-${id}`;
     contenedorGeneral.style.backgroundColor = color;
@@ -126,6 +130,16 @@ function dibujarEvento(id, nombre, fechaInicio, total, color, boletosVendidos) {
     contenedorAsistentes.textContent = 'Asistentes: ' + boletosVendidos;
     contenedorAsistentes.classList.add('contenido-evento');
 
+    // Contenedor de los ingresos
+    contenedorIngresos = document.createElement('div');
+    contenedorIngresos.textContent = 'Ingresos: ' + ingresos;
+    contenedorIngresos.classList.add('contenido-evento');
+
+    // Contenedor de los gastos
+    contenedorGastos = document.createElement('div');
+    contenedorGastos.textContent = 'Gastos: ' + gastos;
+    contenedorGastos.classList.add('contenido-evento');
+
     // Contenedor con el dinero generado
     contenedorTotal = document.createElement('div');
     contenedorTotal.textContent = 'Total: $' + total;
@@ -137,6 +151,8 @@ function dibujarEvento(id, nombre, fechaInicio, total, color, boletosVendidos) {
     contenedorGeneral.appendChild(contenedorEvento);
     contenedorGeneral.appendChild(contenedorFechaInicio);
     contenedorGeneral.appendChild(contenedorAsistentes);
+    contenedorGeneral.appendChild(contenedorIngresos);
+    contenedorGeneral.appendChild(contenedorGastos);
     contenedorGeneral.appendChild(contenedorTotal);
 
     return contenedorGeneral;

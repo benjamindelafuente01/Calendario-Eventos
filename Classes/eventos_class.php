@@ -125,6 +125,27 @@
             return $resultado;
         }
 
+        // Método para finalizar un evento
+        public function finalizarEvento($id) {
+
+            // Sentencia SQL
+            $sql = "UPDATE evento SET evento_finalizado = true WHERE id_evento = :ID";
+
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos parametros con bindParam
+            $stmt->bindParam(':ID', $id);
+
+            // Ejecutamos consulta
+            $stmt->execute();
+
+            // Verificamos resultado
+            $resultado = $stmt->rowCount() > 0 ? true : false;
+            
+            return $resultado;
+        }
+
 
     }
 

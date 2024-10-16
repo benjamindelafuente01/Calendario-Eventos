@@ -44,7 +44,7 @@
         public function traerEventos() {
 
             // Sentencia SQL
-            $sql = "SELECT title, start, end, color, hora_inicio FROM eventos";
+            $sql = "SELECT nombre, fecha_inicio, fecha_fin, hora_inicio, hora_fin, color FROM evento";
 
             // Preparamos la consulta
             $stmt = $this->conexion_pdo->prepare($sql);

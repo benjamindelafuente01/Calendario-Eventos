@@ -47,9 +47,9 @@
             // Recorremos arreglo para agregar eventos de forma individual con arreglo auxiliar
             foreach($eventos as $evento) {
                 $arregloAuxiliar = array (
-                    'title' => $evento['title'],
-                    'start' => $evento['start'] .  'T' . $evento['hora_inicio'],
-                    'end' => $evento['end'] . 'T' . '23:59',
+                    'title' => $evento['nombre'],
+                    'start' => $evento['fecha_inicio'] .  'T' . $evento['hora_inicio'],
+                    'end' => $evento['fecha_fin'] . 'T' . $evento['hora_fin'],
                     'color' => $evento['color']
                 );
                 // Agregamos arreglo auxilixar al arreglo principal

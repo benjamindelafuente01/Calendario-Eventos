@@ -108,7 +108,7 @@
         public function eliminarEvento($id) {
 
             // Sentencia SQL
-            $sql = "DELETE FROM eventos WHERE id = :ID";
+            $sql = "UPDATE evento SET eliminado = true WHERE id_evento = :ID";
 
             // Preparamos la consulta
             $stmt = $this->conexion_pdo->prepare($sql);

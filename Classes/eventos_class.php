@@ -19,20 +19,15 @@
         // Método para traer los eventos
         public function traerEventos() {
 
-            // Fecha de hoy
-            $fechaHoy = date("Y-m-d");
-
             // Sentencia SQL
-            $sql = "SELECT id, title, start, end, precio_boleto, boletos_vendidos, color, hora_inicio 
-                FROM eventos
-                WHERE start >= :fechaHoy ORDER BY start ASC"
+            $sql = "SELECT id_evento, nombre, fecha_inicio, hora_inicio, color, costo_boleto  
+                FROM evento
+                WHERE eliminado = false AND evento_finalizado = false
+                ORDER BY fecha_inicio ASC"
             ;
 
             // Preparamos la consulta
             $stmt = $this->conexion_pdo->prepare($sql);
-
-            // Asociamos valores
-            $stmt->bindParam(':fechaHoy', $fechaHoy);
 
             // Ejecutamos consulta
             $stmt->execute();

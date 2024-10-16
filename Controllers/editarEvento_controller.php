@@ -6,6 +6,9 @@
     // Especificamos que devolveremos un json
     header('Content-Type: application/json');
 
+    // Establecemos la zona horario como CDMX
+    date_default_timezone_set('America/Mexico_City');
+
     // Verificamos que se haya enviado mediante POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -18,6 +21,11 @@
         $nuevoHoraInicio = filter_var($_POST['hora_inicio_evento_editar'], FILTER_SANITIZE_STRING);
         $nuevoColor = filter_var($_POST['color_evento_editar'], FILTER_SANITIZE_STRING);
 
+        // Valor de hoy (fecha en que se actualizo)
+        $fecha_actualizacion = date("Y-m-d H:i:s");
+        // TODO: Valor temporal del usuario
+        $usuario = 'Benjamin';
+
         /*
             Enviamos datos actualizados
         */
@@ -26,7 +34,7 @@
         $evento = new Eventos();
 
         // Insertamos datos
-        $eventoEditado = $evento->editarEvento($id, $nuevoNombre, $nuevoCosto, $nuevoFechaInicio, $nuevoFechaFin, $nuevoHoraInicio, $nuevoColor);
+        $eventoEditado = $evento->editarEvento($id, $nuevoNombre, $nuevoCosto, $nuevoFechaInicio, $nuevoFechaFin, $nuevoHoraInicio, $nuevoColor, $usuario, $fecha_actualizacion);
 
         // Verificamos si se actualizó correctamente
         if ($eventoEditado) {

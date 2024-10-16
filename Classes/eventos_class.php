@@ -75,13 +75,14 @@
 
 
         // Método para actualizar los datos del evento que se editó
-        public function editarEvento ($id, $tituloNuevo, $costoNuevo, $fechaInicioNuevo, $fechaFinNuevo, $horaInicioNuevo, $colorNuevo) {
+        public function editarEvento ($id, $tituloNuevo, $costoNuevo, $fechaInicioNuevo, $fechaFinNuevo, $horaInicioNuevo, $colorNuevo, $usuario, $fecha_actualizacion) {
 
             // Setencia SQL
-            $sql = "UPDATE eventos 
-                SET title = :NOMBRE, start = :FECHA_INICIO, end = :FECHA_FIN, color = :COLOR, 
-                precio_boleto = :COSTO, hora_inicio = :HORA_INICIO
-                WHERE id = :ID"
+            $sql = "UPDATE evento
+                SET nombre = :NOMBRE, fecha_inicio = :FECHA_INICIO, fecha_fin = :FECHA_FIN, color = :COLOR, 
+                costo_boleto = :COSTO, hora_inicio = :HORA_INICIO, ultimo_usuario = :USUARIO, 
+                fecha_actualizacion = :FECHA_ACTUALIZACION
+                WHERE id_evento = :ID"
             ;
 
             // Preparamos consulta
@@ -89,7 +90,9 @@
 
             // Asociamos valores mediante un arreglo
             $marcadores = [':NOMBRE' => $tituloNuevo, ':FECHA_INICIO' => $fechaInicioNuevo, ':FECHA_FIN' => $fechaFinNuevo,
-                ':COLOR' => $colorNuevo, ':COSTO' => $costoNuevo, ':HORA_INICIO' => $horaInicioNuevo, ':ID' => $id];
+                ':COLOR' => $colorNuevo, ':COSTO' => $costoNuevo, ':HORA_INICIO' => $horaInicioNuevo, ':ID' => $id,
+                ':USUARIO' => $usuario,'FECHA_ACTUALIZACION' => $fecha_actualizacion
+            ];
             
             // Ejecutamos consulta
             $stmt->execute($marcadores);

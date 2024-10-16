@@ -48,9 +48,9 @@
         public function traerDatosEventoEditar($id) {
 
             // Sentencia SQL
-            $sql = "SELECT id, title, start, end, color, precio_boleto, hora_inicio 
-                FROM eventos 
-                WHERE id = :ID"
+            $sql = "SELECT id_evento, nombre, fecha_inicio, fecha_fin, hora_inicio, costo_boleto, color
+                FROM evento
+                WHERE id_evento = :ID"
             ;
 
             // Preparamos la consulta

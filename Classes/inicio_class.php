@@ -15,11 +15,11 @@
         }
 
         // Método para insertar un nuevo evento en la base de datos
-        public function crearNuevoEvento ($titulo, $fecha_inicio, $fecha_fin, $color, $precio, $hora_inicio) {
+        public function crearNuevoEvento ($nombre, $fecha_inicio, $fecha_fin, $color, $precio, $hora_inicio, $hora_fin, $usuario, $fecha_creacion) {
 
             // Creamos estructura de la consulta
-            $sql = "INSERT INTO eventos(title, start, end, color, precio_boleto, hora_inicio) 
-                    VALUES (:titulo, :fecha_inicio, :fecha_fin, :color, :precio, :hora_inicio)"
+            $sql = "INSERT INTO evento(nombre, fecha_inicio, fecha_fin, hora_inicio, hora_fin, color, costo_boleto, ultimo_usuario, fecha_creacion) 
+                    VALUES (:NOMBRE, :FECHA_INICIO, :FECHA_FIN, :HORA_INICIO, :HORA_FIN, :COLOR, :COSTO_BOLETO, :ULTIMO_USUARIO, :FECHA_CREACION)"
             ;
             
             // Preparamos la consulta
@@ -27,8 +27,8 @@
             
             // Asociamos valores
             $marcadores = [
-                ':titulo' => $titulo, ':fecha_inicio' => $fecha_inicio, ':fecha_fin' => $fecha_fin,
-                ':color' => $color, ':precio' => $precio, ':hora_inicio' => $hora_inicio
+                ':NOMBRE' => $nombre, ':FECHA_INICIO' => $fecha_inicio, ':FECHA_FIN' => $fecha_fin, ':HORA_INICIO' => $hora_inicio, ':HORA_FIN' => $hora_fin,
+                ':COLOR' => $color, ':COSTO_BOLETO' => $precio, ':ULTIMO_USUARIO' => $usuario, ':FECHA_CREACION' => $fecha_creacion
             ];
             
             // Ejecutamos la consulta
@@ -44,7 +44,7 @@
         public function traerEventos() {
 
             // Sentencia SQL
-            $sql = "SELECT title, start, end, color, hora_inicio FROM eventos";
+            $sql = "SELECT nombre, fecha_inicio, fecha_fin, hora_inicio, hora_fin, color FROM evento";
 
             // Preparamos la consulta
             $stmt = $this->conexion_pdo->prepare($sql);

@@ -43,11 +43,11 @@ function datosEventoAEditar(id) {
 function escribirDatosEventoEditar(evento) {
 
     // Obtenemos los elementos y les asignamos los valores anteriores
-    document.getElementById('id_evento_editar').value = evento.id;
-    document.getElementById('nombre_evento_editar').value = evento.title;
-    document.getElementById('costo_evento_editar').value = evento.precio_boleto;
-    document.getElementById('fecha_inicio_evento_editar').value = evento.start;
-    document.getElementById('fecha_fin_evento_editar').value = evento.end;
+    document.getElementById('id_evento_editar').value = evento.id_evento;
+    document.getElementById('nombre_evento_editar').value = evento.nombre;
+    document.getElementById('costo_evento_editar').value = evento.costo_boleto;
+    document.getElementById('fecha_inicio_evento_editar').value = evento.fecha_inicio;
+    document.getElementById('fecha_fin_evento_editar').value = evento.fecha_fin;
     document.getElementById('hora_inicio_evento_editar').value = evento.hora_inicio.substring(0, 5);
     document.getElementById('color_evento_editar').value = evento.color
 

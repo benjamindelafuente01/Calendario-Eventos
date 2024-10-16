@@ -18,6 +18,9 @@
                 <!-- Formulario de datos para crear el Evento -->
                 <form id="formularioCrearEvento" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 
+                    <!-- Input oculto que almacena la hora de fin -->
+                    <input type="hidden" id="hora_fin_evento" name="hora_fin_evento" value = "23:59">
+
                     <div class="row g-3 mt-2">
                         <div class="col-md-6">
                             <label for="nombre_evento" class="form-label fw-semibold">Nombre evento: </label>

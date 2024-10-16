@@ -64,20 +64,24 @@ function mostrarEventos(data) {
     data.forEach(evento => {
         
         // ID del evento
-        let idEvento = evento.id.toString();
+        let idEvento = evento.id_evento.toString();
         // Nombre del evento
-        let nombreEvento = evento.title.toString();
+        let nombreEvento = evento.nombre.toString();
         // Fecha de inicio
-        let fechaInicio = evento.start;
-        // Calculamos el dinero recaudado
-        let dineroEvento = parseFloat(evento.precio_boleto) * parseInt(evento.boletos_vendidos);
+        let fechaInicio = evento.fecha_inicio;
         // Color del evento
         let colorEvento = evento.color.toString();
         // Boletos vendidos
-        let boletosVendidos = parseInt(evento.boletos_vendidos);
+        let boletosVendidos = 0;    // parseInt
+        // Ingresos
+        let ingresosEvento = 0;    // parseFloat()
+        // Gastos
+        let gastosEvento = 0       // parseFloat()
+        // Calculamos el dinero recaudado
+        let totalEvento =  ingresosEvento - gastosEvento;
 
         // Llamamos a la función para dibujar eventos de forma individual
-        let contenedorEvento = dibujarEvento(idEvento, nombreEvento, fechaInicio, dineroEvento, colorEvento, boletosVendidos);
+        let contenedorEvento = dibujarEvento(idEvento, nombreEvento, fechaInicio, colorEvento, boletosVendidos, ingresosEvento, gastosEvento, totalEvento);
 
         // Agregamos evento al contenedor
         contenedorEventos.appendChild(contenedorEvento);
@@ -89,20 +93,20 @@ function mostrarEventos(data) {
 /*
     Función para dibujar los eventos de forma individual
 */
-function dibujarEvento(id, nombre, fechaInicio, total, color, boletosVendidos) {
+function dibujarEvento(id, nombre, fechaInicio, color, boletosVendidos, ingresos, gastos, total) {
 
     // Variables para cada elemento del evento
-    // let imagenEditar;
-    let imagenOpciones;
     let contenedorEvento;
     let contenedorFechaInicio;
     let contenedorAsistentes;
+    let contenedorIngresos;
+    let contenedorGastos;
     let contenedorTotal;
     let contenedorGeneral;
     let dropdown;
     
 
-    // Contenedor general donde se guardaran todos los elemento
+    // Contenedor general donde se guardaran todos los elementos
     contenedorGeneral = document.createElement('div');
     contenedorGeneral.id = `evento-${id}`;
     contenedorGeneral.style.backgroundColor = color;
@@ -126,6 +130,16 @@ function dibujarEvento(id, nombre, fechaInicio, total, color, boletosVendidos) {
     contenedorAsistentes.textContent = 'Asistentes: ' + boletosVendidos;
     contenedorAsistentes.classList.add('contenido-evento');
 
+    // Contenedor de los ingresos
+    contenedorIngresos = document.createElement('div');
+    contenedorIngresos.textContent = 'Ingresos: ' + ingresos;
+    contenedorIngresos.classList.add('contenido-evento');
+
+    // Contenedor de los gastos
+    contenedorGastos = document.createElement('div');
+    contenedorGastos.textContent = 'Gastos: ' + gastos;
+    contenedorGastos.classList.add('contenido-evento');
+
     // Contenedor con el dinero generado
     contenedorTotal = document.createElement('div');
     contenedorTotal.textContent = 'Total: $' + total;
@@ -137,6 +151,8 @@ function dibujarEvento(id, nombre, fechaInicio, total, color, boletosVendidos) {
     contenedorGeneral.appendChild(contenedorEvento);
     contenedorGeneral.appendChild(contenedorFechaInicio);
     contenedorGeneral.appendChild(contenedorAsistentes);
+    contenedorGeneral.appendChild(contenedorIngresos);
+    contenedorGeneral.appendChild(contenedorGastos);
     contenedorGeneral.appendChild(contenedorTotal);
 
     return contenedorGeneral;
@@ -153,6 +169,7 @@ function crearDropdown(id) {
     const rutaImagenEditar = '../Iconos/editar-evento.png';
     const rutaImagenEliminar = '../Iconos/borrar-evento.png';
     const rutaImagenReporte = '../Iconos/reporte-evento.png';
+    const rutaImagenFinalizar = '../Iconos/finalizar-evento.png';
     
 
     // Contenedor del dropdown
@@ -229,14 +246,32 @@ function crearDropdown(id) {
     opcionReporte.appendChild(document.createTextNode('Generar Reporte'));
 
     /* 
+        Opcion Finalizar evento
+    */
+    let opcionFinalizar = document.createElement('li');
+    opcionFinalizar.classList.add('dropdown-item');
+
+    // Evento al hacer clic en el 'li'
+    opcionFinalizar.addEventListener('click', function() {
+        finalizarEvento(id);
+    });
+       
+    // Imagen de finalizar
+    let imagenFinalizar = document.createElement('img');
+    imagenFinalizar.setAttribute('src', `${rutaImagenFinalizar}`);
+    imagenFinalizar.setAttribute('height', '20');
+    imagenFinalizar.setAttribute('width', '20');
+    imagenFinalizar.classList.add('opciones-evento');
+       
+    // Añadir la imagen y el texto directamente al 'li'
+    opcionFinalizar.appendChild(imagenFinalizar);
+    opcionFinalizar.appendChild(document.createTextNode('Finalizar Evento'));
+
+    /* 
         Opcion eliminar
     */
     let opcionEliminar = document.createElement('li');
     opcionEliminar.classList.add('dropdown-item');
-
-    // Asignamos data target al 'li' para que al hacer clic se active el modal
-    // opcionEliminar.setAttribute('data-bs-toggle', 'modal');
-    // opcionEliminar.setAttribute('data-bs-target', '#modalEditarEvento');
 
     // Evento al hacer clic en el 'li'
     opcionEliminar.addEventListener('click', function() {
@@ -258,6 +293,7 @@ function crearDropdown(id) {
     // Agregamos opciones al menu
     dropdownMenu.appendChild(opcionEditar);
     dropdownMenu.appendChild(opcionReporte);
+    dropdownMenu.appendChild(opcionFinalizar);
     dropdownMenu.appendChild(opcionEliminar);
 
     // Agregar el toggle y el menú al dropdown
@@ -324,6 +360,79 @@ function eliminarEvento(id) {
                             icon: "error",
                             title: "Oops...",
                             text: "Algo salió mal al eliminar el evento" + (jsonData.mensaje || 'Error desconocido'),
+                            timer: 2000
+                        });
+                    }
+
+                } catch (e) {
+                    console.error('Error al procesar JSON:', e);
+                    alert('Hubo un error al procesar la respuesta del servidor. Intenta nuevamente.');
+                }
+        
+            })
+            .catch(error => {
+                console.error('Error al enviar los datos:', error);
+                alert('Hubo un error al enviar los datos al servidor. Intenta nuevamente.');
+            });
+        }
+    });
+}
+
+
+/*
+    Función para finalizar un evento
+*/
+function finalizarEvento(id) {
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Al finalizar el evento ya no se podrá vender más boletos o añadir más gastos",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0B5ED7",
+        cancelButtonColor: "#BB2D3B",
+        confirmButtonText: "Finalizar evento",
+        cancelButtonText: "Cancelar"
+    
+    }).then((result) => {
+        
+        if (result.isConfirmed) {
+
+            // Hacer la solicitud fetch para enviar los datos al servidor
+            fetch('../Controllers/finalizarEvento_controller.php', {
+                // Valores de la peticion
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id })
+            })
+            .then(response => response.text()) // Leer la respuesta como texto
+            .then(data => {
+                console.log('Respuesta del servidor (antes de JSON):', data);
+                try {
+                    // Intentar convertir la respuesta a JSON
+                    let jsonData = JSON.parse(data);
+                
+                    // Procesar la respuesta del servidor
+                    if (jsonData.exito) {
+                        // Mensaje de exito
+                        Swal.fire({
+                            title: "¡Evento finalizado!",
+                            text: "El evento se ha terminado",
+                            icon: "success",
+                            timer: 2000
+                        });
+
+                        // Recargamos los eventos
+                        traerEventos();
+
+                    } else {
+                        // Mensaje de error
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salió mal al finalizar el evento" + (jsonData.mensaje || 'Error desconocido'),
                             timer: 2000
                         });
                     }

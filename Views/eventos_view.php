@@ -80,6 +80,7 @@
 
     <?php
         require ('../Modals/editarEvento_modal.php');
+        require ('../Modals/agregarGasto_modal.php');
     ?>
 
 </body>

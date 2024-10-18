@@ -146,7 +146,31 @@
             return $resultado;
         }
 
+        
+        // Método para agregar un gasto de un evento
+        public function agregarGasto($idEvento, $concepto, $monto, $fecha, $usuario) {
+        
+            // Estructura de la consulta
+            $sql = "INSERT INTO gasto (concepto_gasto, fecha_gasto, monto_gasto, usuario, id_evento)
+                VALUES (:CONCEPTO, :FECHA, :MONTO, :USUARIO, :ID_EVENTO)"
+            ;
 
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos valores
+            $marcadores = [':CONCEPTO' => $concepto, ':FECHA' => $fecha, ':MONTO' => $monto, ':USUARIO' => $usuario,
+                ':ID_EVENTO' => $idEvento
+            ];
+
+            // Ejecutamos consulta
+            $stmt->execute($marcadores);
+
+            // Verificamos resultado
+            $resultado = $stmt->rowCount() > 0 ? true : false;
+            
+            return $resultado;
+        }
     }
 
 ?>

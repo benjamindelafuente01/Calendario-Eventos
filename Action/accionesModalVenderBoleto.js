@@ -131,3 +131,12 @@ function actualizarDistritoPorIglesia() {
         }
     }
 }
+
+
+/*
+    Function para escribir el precio cuando se eliga un evento
+*/
+function actualizarDistritoPorIglesia() {
+
+
+}

@@ -26,7 +26,7 @@
                     </div>
 
                     <div>
-                        <a href="#" class="btn-close-white" data-bs-toggle="modal" data-bs-target="#modalAgregarEvento">
+                        <a href="#" class="btn-close-white" data-bs-toggle="modal" data-bs-target="#modalVenderBoleto">
                             <img src="../Iconos/anadir.png" class="" width="50" alt="Add Event">
                         </a>
                     </div>
@@ -81,6 +81,7 @@
     <?php
         require ('../Modals/editarEvento_modal.php');
         require ('../Modals/agregarGasto_modal.php');
+        require ('../Modals/venderBoleto_modal.php');
     ?>
 
 </body>

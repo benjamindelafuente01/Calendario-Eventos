@@ -25,6 +25,14 @@ document.getElementById('iglesia_boleto').addEventListener('change', function ()
 
 
 /*
+    Evento para cuando se seleccione un evento colocar el precio
+*/
+document.getElementById('evento_boleto').addEventListener('change', function () {
+    actualizarPagoPorEvento();
+});
+
+
+/*
     Función para escribir en los select las opciones existentes de distrito, iglesias y eventos
 */
 function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
@@ -45,6 +53,8 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
 
             // Guardamos los datos de cada select en un dataset
             select.dataset[`${opcion}Data`] = JSON.stringify(data.opciones);
+
+            // console.log(data.opciones);
 
             // Escribimos las respectivas opciones
             data.opciones.forEach(elemento => {
@@ -72,11 +82,20 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
                     opcionSelect.dataset.distritoId = elemento.id_distrito;
                 }
 
-                // TODO: Si la opción es evento, guardar el costo de cada boleto
+                // Si la opción es evento, guardar el costo de cada boleto
+                if (opcion == 'evento') {
+                    // Asociamos el id del distrito como un data attribute
+                    opcionSelect.dataset.precioEvento = elemento.costo_boleto;
+                }
 
                 // Agregamos opcion al select
                 select.appendChild(opcionSelect);
             });
+
+            // Si la opción es evento, actualizamos el placeholder del campo de monto
+            if (opcion == 'evento') {
+                actualizarPagoPorEvento();
+            }
 
         } else {
             // Mensaje de error
@@ -136,7 +155,25 @@ function actualizarDistritoPorIglesia() {
 /*
     Function para escribir el precio cuando se eliga un evento
 */
-function actualizarDistritoPorIglesia() {
+function actualizarPagoPorEvento() {
 
+    // Obtenemos el select de la evento
+    let eventoSelect = document.getElementById('evento_boleto');
+    // Obtenemos el input del monto
+    let montoInput = document.getElementById('monto_pagado_boleto');
+    // Obtenemos el precio del evento seleccionado
+    let precioEvento = eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento;
+    // Obtetenemos los botones del tipo de pago
+    let botonesTipoPago = document.getElementsByName('tipo_pago');
+
+    // Establecemos precio como place holder
+    montoInput.placeholder = precioEvento;
+    // En caso de estar desactivado, activamos
+    montoInput.readonly = false;
+
+    // Limpiamos opciones de tipo de pago
+    botonesTipoPago.forEach(function(radio) {
+        radio.checked = false;
+    })
 
 }

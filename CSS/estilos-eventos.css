@@ -86,3 +86,12 @@
     /* margin: 0; */
     vertical-align: middle;  /* Alinea la imagen con el texto */
 }
+
+
+/**********************************************************
+*              Estilos modal de boletos                   *
+**********************************************************/
+.select-distrito {
+    pointer-events: none;  /* No permite clics ni selección */
+    background-color: #e9ecef; /* Color gris para dar apariencia de deshabilitado */
+}

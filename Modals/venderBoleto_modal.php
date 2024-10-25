@@ -61,7 +61,7 @@
                         <div class="col-md-6">
                             <label for="monto_pagado_boleto" class="form-label fw-semibold">Monto pagado: </label>
                             <input class="form-control bg-white border-1 border-secondary" type="number" id="monto_pagado_boleto" name="monto_pagado_boleto" placeholder="Costo en pesos mexicanos" required>
-                            <div id="validarColorEvento" class=""></div>
+                            <div id="validarMontoPagadoBoleto" class=""></div>
                         </div>
                     </div>
 
@@ -71,7 +71,7 @@
 
             <!-- Botones u otro contenido adicional en el pie del modal -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="validarCampos();">Vender</button>
+                <button type="button" class="btn btn-primary" onclick="validarFormularioVenderBoleto();">Vender</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="vaciarModalVenderBoleto();">Cancelar</button>
             </div>
         </div>
@@ -81,3 +81,4 @@
 <!-- Script para limpiar formulario -->
 <script src="../Action/sweetalert2.js"></script>
 <script src="../Action/accionesModalVenderBoleto.js"></script>
+<script src="../Action/validarModalVenderBoleto.js"></script>

@@ -33,6 +33,16 @@ document.getElementById('evento_boleto').addEventListener('change', function () 
 
 
 /*
+    Evento para cuando se seleccione un tipo de pago manipular el monto
+*/
+document.querySelectorAll('input[name="tipo_pago"').forEach((radio) => {
+    radio.addEventListener('change', function () {
+        ajustarMontoPorTipoPago();
+    });
+});
+
+
+/*
     Función para escribir en los select las opciones existentes de distrito, iglesias y eventos
 */
 function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
@@ -161,19 +171,67 @@ function actualizarPagoPorEvento() {
     let eventoSelect = document.getElementById('evento_boleto');
     // Obtenemos el input del monto
     let montoInput = document.getElementById('monto_pagado_boleto');
+    // Obtenemos el div con la validacion
+    let montoValido = document.getElementById('validarMontoPagadoBoleto');
     // Obtenemos el precio del evento seleccionado
     let precioEvento = eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento;
     // Obtetenemos los botones del tipo de pago
     let botonesTipoPago = document.getElementsByName('tipo_pago');
 
-    // Establecemos precio como place holder
+    // Limpiamos input del monto ingresado
+    montoInput.value = '';
+    // Establecemos precio como placeholder
     montoInput.placeholder = precioEvento;
     // En caso de estar desactivado, activamos
-    montoInput.readonly = false;
+    montoInput.readOnly = false;
+    // Eliminamos cualquier clase de error del input
+    montoInput.classList.remove('is-invalid');
+    // Eliminamos cualquier mensaje de error del div de validacion
+    montoValido.innerHTML = '';
+    // Eliminamos cualquier clase de error del div de validacion
+    montoValido.classList.remove('invalid-feedback');
 
     // Limpiamos opciones de tipo de pago
     botonesTipoPago.forEach(function(radio) {
         radio.checked = false;
     })
+}
+
+
+/*
+    Funcion para que dependiendo de la opcion del tipo de pago, se modifique el monto
+*/
+function ajustarMontoPorTipoPago() {
+
+    // Obtenemos el radiobutton seleccionado
+    let tipoPagoSeleccionado = document.querySelector('input[name="tipo_pago"]:checked').value;
+    // Obtenemos el input del monto pagado
+    let montoInput = document.getElementById('monto_pagado_boleto');
+    // Obtenemos el div con la validacion
+    let montoValido = document.getElementById('validarMontoPagadoBoleto');
+    // Obtenemos el select del evento
+    let eventoSelect = document.getElementById('evento_boleto');
+    // Obtenemos el precio del evento seleccionado
+    let precioEvento = parseInt(eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento);
+
+    // Verificamos la opcion seleccionada
+    if (tipoPagoSeleccionado == 'pago_completo') {
+        // Establecemos el precio del boleto
+        montoInput.value = precioEvento;
+        // Ponemos en solo lectura
+        montoInput.readOnly = true;
+        // Eliminamos clase de error del input
+        montoInput.classList.remove('is-invalid');
+        // Eliminamos mensaje de error del div de validacion
+        montoValido.innerHTML = '';
+        // Eliminamos clase de error del div de validacion
+        montoValido.classList.remove('invalid-feedback');
+        
+    } else if (tipoPagoSeleccionado == 'pago_parcial') {
+        // Limpiamos el input
+        montoInput.value = '';
+        // Desactivamos modo lectura
+        montoInput.readOnly = false;
+    }
 
 }

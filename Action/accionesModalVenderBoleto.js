@@ -61,9 +61,6 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
             // Limpiamos select
             select.innerHTML = '';
 
-            // Guardamos los datos de cada select en un dataset
-            select.dataset[`${opcion}Data`] = JSON.stringify(data.opciones);
-
             // console.log(data.opciones);
 
             // Escribimos las respectivas opciones
@@ -71,30 +68,27 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
                 // Creamos una nueva opcion
                 let opcionSelect = document.createElement('option');
                     
-                // Accedemos al valor del id según el tipo de opción
-                let idElemento;
+                // Según el tipo de opción, almacenamos diferentes valores
                 if (opcion === 'iglesia') {
-                    idElemento = elemento.id_iglesia;
+                    // Almacenamos nombre de la iglesia
+                    opcionSelect.value = elemento.nombre;
+                    // Escribimos valor
+                    opcionSelect.text = elemento.nombre
+                    // Asociamos el id del distrito al que pertenece la iglesia como un data attribute
+                    opcionSelect.dataset.distritoDeIglesia = elemento.id_distrito;
                 } else if (opcion === 'distrito') {
-                    idElemento = elemento.id_distrito;
+                    // Almacenamos nombre del distrito
+                    opcionSelect.value = elemento.nombre;
+                    // Escribimos valor
+                    opcionSelect.text = elemento.nombre
+                    // Asociamos el id del distrito como un data attribute
+                    opcionSelect.dataset.idDistrito = elemento.id_distrito;
                 } else if (opcion === 'evento') {
-                    idElemento = elemento.id_evento;
-                }
-
-                // Almacenamos id
-                opcionSelect.value = idElemento;
-                // Escribimos valor
-                opcionSelect.text = elemento.nombre
-
-                // Si la opcion es iglesia guardamos el id del distrito
-                if (opcion == 'iglesia') {
-                    // Asociamos el id del distrito como un data attribute
-                    opcionSelect.dataset.distritoId = elemento.id_distrito;
-                }
-
-                // Si la opción es evento, guardar el costo de cada boleto
-                if (opcion == 'evento') {
-                    // Asociamos el id del distrito como un data attribute
+                    // Almacenamos id
+                    opcionSelect.value = elemento.id_evento;
+                    // Escribimos valor
+                    opcionSelect.text = elemento.nombre
+                    // Asociamos el precio del evento como un data attribute
                     opcionSelect.dataset.precioEvento = elemento.costo_boleto;
                 }
 
@@ -139,9 +133,9 @@ function actualizarDistritoPorIglesia() {
     let iglesiaSelect = document.getElementById('iglesia_boleto');
     let distritoSelect = document.getElementById('distrito_boleto');
 
-    // Del select de iglseias, accedemos a las opciones, de ahi a la que se haya elegido y accedemos
+    // Del select de iglesias, accedemos a las opciones, de ahi a la que se haya elegido y accedemos
     // su dataset para conocer el id del distrito
-    let distritoId = iglesiaSelect.options[iglesiaSelect.selectedIndex].dataset.distritoId;
+    let distritoId = iglesiaSelect.options[iglesiaSelect.selectedIndex].dataset.distritoDeIglesia;
 
     // Seleccionamos automáticamente el distrito correspondiente
     if (distritoId) {
@@ -150,7 +144,7 @@ function actualizarDistritoPorIglesia() {
         for (let i = 0; i < distritoSelect.options.length; i++) {
 
             // Comparamos el id de todas las opciones del select de distrito y comparamos con el id distrito de la opcion elegida
-            if (distritoSelect.options[i].value === distritoId.toString()) {
+            if (distritoSelect.options[i].dataset.idDistrito == distritoId) {
 
                 // Seleccionar el distrito correspondiente
                 distritoSelect.selectedIndex = i;

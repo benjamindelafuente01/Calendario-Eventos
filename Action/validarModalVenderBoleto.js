@@ -5,7 +5,7 @@
 
 
 /*
-    Funcion para vaciar el modal de generar gasto de evento
+    Funcion para vaciar el modal de vender boleto
 */
 function vaciarModalVenderBoleto() {
 
@@ -38,9 +38,9 @@ function vaciarModalVenderBoleto() {
 }
 
 /*
-    Función para cerrar el modal de agregar gasto a evento
+    Función para cerrar el modal de vender boleto
 */
-function cerrarModalGastoEvento() {
+function cerrarModalVenderBoleto() {
 
     // Obtenemos el modal activo
     const modalElement = document.getElementById('modalVenderBoleto');
@@ -182,5 +182,74 @@ function validarFormularioVenderBoleto() {
 
     // Llamamos a la función para verificar
     let resultado = validarCamposVenderBoleto();
-    
+
+    // Verificamos el resultado de la validación y enviamos formulario
+    if (resultado) {
+        
+        /*
+            Envíamos el formulario mediante fetch
+        */
+
+        // Obtenemos el formulario
+        const formulario = document.getElementById('formularioVenderBoleto');
+
+        // Creamos un objeto 'FormData' con los datos del formulario
+        const datosFormulario = new FormData(formulario);
+
+        // Hacer la solicitud fetch para enviar los datos al servidor
+        fetch('../Controllers/registrarVentaBoleto_controller.php', {
+            method: 'POST',
+            body: datosFormulario
+        })
+        .then(response => response.text()) // Leer la respuesta como texto
+        .then(data => {
+            console.log('Respuesta del servidor (antes de JSON):', data);
+            try {
+                // Intentar convertir la respuesta a JSON
+                let jsonData = JSON.parse(data);
+                 
+                // Procesar la respuesta del servidor
+                if (jsonData.exito) {
+ 
+                    // Mensaje de exito
+                    Swal.fire({
+                        title: "¡Boleto vendido!",
+                        text: "El boleto se ha vendido correctamente y el pago se ha registrado",
+                        icon: "success",
+                        timer: 2000
+                    });
+ 
+                    // Cerrar el modal (en esta función también se limpia)
+                    cerrarModalVenderBoleto();
+                    // Recargamos los eventos
+                    traerEventos();
+ 
+                } else {
+                    // Mensaje de error
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salió mal al resgistrar el boleto: " + jsonData.mensaje,
+                        timer: 2000
+                    });
+                }
+ 
+            } catch (e) {
+                // console.error('Error al procesar JSON:', e);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error al procesar la respuesta del servidor." 
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error al enviar los datos:', error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Error al enviar los datos." 
+            });
+        });
+    }
 }

@@ -171,6 +171,8 @@ function actualizarPagoPorEvento() {
     let precioEvento = eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento;
     // Obtetenemos los botones del tipo de pago
     let botonesTipoPago = document.getElementsByName('tipo_pago');
+    // Obtenemos el input oculto del precio total del evento
+    let precioTotalEvento = document.getElementById('precio_total_evento');
 
     // Limpiamos input del monto ingresado
     montoInput.value = '';
@@ -184,6 +186,9 @@ function actualizarPagoPorEvento() {
     montoValido.innerHTML = '';
     // Eliminamos cualquier clase de error del div de validacion
     montoValido.classList.remove('invalid-feedback');
+    // Guardamos en un input oculto el precio total del evento
+    precioTotalEvento.value = precioEvento;
+
 
     // Limpiamos opciones de tipo de pago
     botonesTipoPago.forEach(function(radio) {

@@ -17,6 +17,9 @@
                 <!-- Formulario de datos para crear el Evento -->
                 <form id="formularioVenderBoleto" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 
+                    <!-- Input oculto que almacena el precio total del evento -->
+                    <input type="hidden" id="precio_total_evento" name="precio_total_evento">
+
                     <div class="row g-3 mt-2">
                         <div class="col-md-6">
                             <label for="nombre_boleto" class="form-label fw-semibold">Nombre: </label>

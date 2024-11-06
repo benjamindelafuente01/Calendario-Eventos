@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos</title>
+    <title>Buscador de pagos parciales</title>
     <link rel="stylesheet" href="../BootStrap 5.3.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../CSS/estilos-eventos.css">
+    <link rel="stylesheet" href="../CSS/estilos-pagos-parciales.css">
 </head>
 
 <body class="bg-info-subtle d-flex justify-content-center">
@@ -66,12 +66,54 @@
         </nav>
     </div>
 
-    <!-- Eventos individuales -->
+    
+    <!---------------------------------------->
+    <!--      Contenedor de la pagina       -->
+    <!---------------------------------------->
     <div class="mt-5 mb-5 w-100">
-        <div class="mt-5 text-center text-primary-emphasis fs-1 fw-bold">
-            Eventos en Fila
-        </div>
-        <div class="contenedor-eventos mt-2" id="contenedor-eventos">
+
+        <!-- Contenedor de formulario y tabla -->
+        <div class="container my-5 ">
+
+            <!-- Contenedor del titulo -->
+            <div class="text-center text-primary-emphasis fs-1 fw-bold">
+                Gestión de Pagos Parciales
+            </div>
+
+            <!-- Formulario de búsqueda -->
+            <form id="formularioPagosParciales" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="row g-3 mt-3">
+                <div class="col-md-6">
+                    <label for="buscar_por_usuario" class="form-label fw-semibold">Buscar por Usuario</label>
+                    <input type="text" class="form-control bg-white border-1 border-secondary" id="buscar_por_usuario" name="buscar_por_usuario" placeholder="Nombre del usuario">
+                </div>
+                <div class="col-md-6">
+                    <label for="buscar_por_evento" class="form-label fw-semibold">Buscar por Evento</label>
+                    <input type="text" class="form-control bg-white border-1 border-secondary" id="buscar_por_evento" name="buscar_por_evento" placeholder="Nombre del evento">
+                </div>
+                <div class="col-12">
+                    <button type="button" id="buscarPagoParcial" name="buscarPagoParcial" class="btn btn-primary" onclick="validarBusquedaPagoParcial();">Buscar</button>
+                </div>
+            </form>
+
+            <!-- Tabla de resultados -->
+            <div class="table-responsive mt-4" id="contenedorTablaPagosPendientes" style="display: none;">
+                <table class="table table-striped" id="tablaPagosPendientes">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Evento</th>
+                            <th>Costo Evento</th>
+                            <th>Total Pagado</th>
+                            <th>Saldo Restante</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultadosPagosPendientes">
+                        <!-- Aqui iran las filas -->
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 
@@ -79,12 +121,10 @@
     <!-- Script -->
     <script src="../BootStrap 5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="../Action/sweetalert2.js"></script>
-    <script src="../Action/cargarEventos.js"></script>
+    <script src="../Action/buscarPago.js"></script>
 
     <?php
-        require ('../Modals/editarEvento_modal.php');
-        require ('../Modals/agregarGasto_modal.php');
-        require ('../Modals/venderBoleto_modal.php');
+        // require ('../Modals/editarEvento_modal.php');
     ?>
 
 </body>

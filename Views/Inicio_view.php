@@ -52,6 +52,9 @@
                                 <a href="eventos_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Eventos</a>
                             </li>
                             <li class="nav-item">
+                                <a href="pagos_parciales_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Pagos parciales</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Salir</a>
                             </li>
                         </ul>

@@ -130,7 +130,18 @@ function crearTablaPagosPendientes(pagos) {
             <td>${elemento.precio_total}</td>
             <td>${elemento.precio_pagado}</td>
             <td>${elemento.saldo_restante}</td>
-            <td><button class="btn btn-success btn-sm">Agregar Pago</button></td>
+            <td><button class="btn btn-success btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#modalRealizarPagoParcial"
+                data-idBoleto = "${elemento.id_boleto}"
+                data-nombre = "${elemento.nombre}"
+                data-evento = "${elemento.nombre_evento}"
+                data-costoTotal = "${elemento.precio_total}"
+                data-totalPagado = "${elemento.precio_pagado}"
+                data-saldoRestante = "${elemento.saldo_restante}"
+                onclick="llenarModalPagoParcial(this);">
+                Agregar Pago
+            </button></td>
         `;
 
         // Agregamos fila a la tabla

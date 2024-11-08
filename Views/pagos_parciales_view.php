@@ -124,7 +124,7 @@
     <script src="../Action/buscarPago.js"></script>
 
     <?php
-        // require ('../Modals/editarEvento_modal.php');
+        require ('../Modals/realizarPagoParcial_modal.php');
     ?>
 
 </body>

@@ -5,7 +5,7 @@
 
 
 /*
-
+    Funcion para acceder a los valores del boton que se presiono y escribir los datos en el modal de pago parcial
 */
 function llenarModalPagoParcial(boton) {
 
@@ -34,3 +34,53 @@ function llenarModalPagoParcial(boton) {
     campoSaldoRestante.value = saldo_restante;
 
 }
+
+
+/*
+    Funcion para vaciar el modal de pago parcial
+*/
+function vaciarModalPagoParcial() {
+
+    // Arreglo con los inputs
+    const campos = ['id_boleto', 'nombre_pago_parcial', 'nombre_evento_pago_parcial', 'costo_evento_pago_parcial',
+        'total_pagado_pago_parcial', 'saldo_restante_pago_parcial', 'monto_pago_parcial'
+    ];
+
+    // Con un ciclo recorremos el arreglo y limpiamos campos del modal
+    campos.forEach(idCampo => {
+        // Accedemos al campo mediante el ID
+        const campo = document.getElementById(idCampo);
+        // Limpiamos valor
+        campo.value = '';
+        // Eliminamos clase de error (para el campo de monto abonado)
+        campo.classList.remove('is-invalid');
+    });
+
+    // Accedemos al div de validacion de monto abonado y limpiamos
+    const validacionMontoPago = document.getElementById('validarMontoPago');
+    validacionMontoPago.innerHTML = '';
+    validacionMontoPago.classList.remove('invalid-feedback');
+}
+
+
+/*
+    Funcion para cerrar el modal y vaciar campos
+*/
+function cerrarModalPagoParcial() {
+
+    // Obtenemos el modal de pago parcial
+    const modalPagoParcial = document.getElementById('modalRealizarPagoParcial');
+    // Obtenemos la instancia de bootstrap del modal
+    const instanciaModal = bootstrap.Modal.getInstance(modalPagoParcial);
+    
+    // Validamos que el modal este instanciado
+    if (instanciaModal) {
+        // Limpiamos modal
+        vaciarModalPagoParcial();
+        // Cerramos de forma segura
+        instanciaModal.hide();
+    } else {
+        // console.log("El modal no está inicializado");
+    }
+}
+

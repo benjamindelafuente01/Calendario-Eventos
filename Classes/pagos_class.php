@@ -84,6 +84,72 @@
                 return $resultado;
             }
         }
+
+
+        // Metodo para iniciar una transaccion
+        public function iniciarTransaccion() {
+
+            // Utilizamos beginTransaction() de PDO para iniciar una transaccion
+            $this->conexion_pdo->beginTransaction();
+        }
+
+
+        // Metodo para confirmar una transaccion
+        public function confirmarTransaccion() {
+
+            // Utilizamos commit() de PDO para confirmar una transaccion
+            $this->conexion_pdo->commit();
+        }
+
+
+        // Metodo para revertir una transaccion
+        public function revertirTransaccion() {
+
+            // Utilizamos rollBack() de PDO para revertir una transaccion
+            $this->conexion_pdo->rollBack();
+        }
+
+
+        // Metodo guardar un nuevo pago
+        public function guardarPagoParcial($monto, $fecha, $usuario, $idBoleto) {
+
+            // Consulta SQL
+            $sql = "INSERT INTO pago (monto_pago, fecha_pago, usuario, id_boleto)
+                VALUES (:MONTO_PAGO, :FECHA_PAGO, :USUARIO, :ID_BOLETO)"
+            ;
+
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos valores
+            $marcadores = [':MONTO_PAGO' => $monto, ':FECHA_PAGO' => $fecha, ':USUARIO' => $usuario, ':ID_BOLETO' => $idBoleto];
+
+            // Ejecutamos consulta
+            $stmt->execute($marcadores);
+        }
+
+
+        // Metodo para actualizar un boleto cuando se registra un nuevo pago
+        public function actualizarBoleto($idBoleto, $montoAbonado, $finiquitado) {
+
+            // Consulta SQL
+            $sql = "UPDATE boleto
+                SET precio_pagado = precio_pagado + :MONTO_ABONADO, 
+                saldo_restante = saldo_restante - :MONTO_ABONADO, 
+                finiquitado = :FINIQUITADO
+                WHERE id_boleto = :ID_BOLETO"
+            ;
+
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos valores
+            $marcadores = [':MONTO_ABONADO' => $montoAbonado, ':FINIQUITADO' => $finiquitado, ':ID_BOLETO' => $idBoleto];
+
+            // Ejecutamos consulta
+            $stmt->execute($marcadores);
+        }
+
     }
 
 ?>

@@ -113,8 +113,7 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
     })
 
     .catch(error => {
-        // Mostramos error en la consola para depuración
-        console.error('Error al cargar las opciones:', error);
+        // console.error('Error al cargar las opciones:', error);
         // Mostramos mensaje de error al cargar opciones
         Swal.fire({
             icon: "error",

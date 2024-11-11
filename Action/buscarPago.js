@@ -75,7 +75,7 @@ function realizarBusquedaPagoParcial(tipoBusqueda, valorBusqueda) {
             }
 
         } catch(e) {
-            console.error('Error al procesar JSON:', e);
+            // console.error('Error al procesar JSON:', e);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -86,7 +86,7 @@ function realizarBusquedaPagoParcial(tipoBusqueda, valorBusqueda) {
 
     // Error al enviar los datos
     .catch(error => {
-        console.error('Error al enviar los datos:', error);
+        // console.error('Error al enviar los datos:', error);
         Swal.fire({
             icon: "error",
             title: "Oops...",

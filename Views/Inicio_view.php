@@ -27,7 +27,8 @@
                         <a class="navbar-brand text-white" href="#">Menú</a>
                     </div>
 
-                    <div>
+                    <div class="navbar-brand text-white me-2">
+                        Crear Evento
                         <a href="#" class="btn-close-white" data-bs-toggle="modal" data-bs-target="#modalAgregarEvento">
                             <img src="../Iconos/anadir.png" class="" width="50" alt="Add Event">
                         </a>
@@ -55,6 +56,12 @@
                                 <a href="pagos_parciales_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Pagos parciales</a>
                             </li>
                             <li class="nav-item">
+                                <a href="iglesias_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Iglesias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="historial_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Historial eventos</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Salir</a>
                             </li>
                         </ul>
@@ -71,7 +78,7 @@
     <!---------------------------------------->
     <!--   Contenedor titulo y calendario   -->
     <!---------------------------------------->
-    <div class="container mt-5 pt-4"> 
+    <div class="container mt-5 pt-5"> 
         
         <!-- Fila que contiene titulo y calendario -->
         <div class="row justify-content-center">

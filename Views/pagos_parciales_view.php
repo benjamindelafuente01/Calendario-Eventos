@@ -25,9 +25,10 @@
                         <a class="navbar-brand text-white" href="#">Menú</a>
                     </div>
 
-                    <div>
-                        <a href="#" class="btn-close-white" data-bs-toggle="modal" data-bs-target="#modalVenderBoleto">
-                            <img src="../Iconos/anadir.png" class="" width="50" alt="Add Event">
+                    <div class="navbar-brand text-white me-2">
+                        Pagos
+                        <a href="#" class="btn-close-white" title="No hay opciones adicionales en este módulo">
+                            <img src="../Iconos/buscar.png" class="" width="50" alt="Add Event">
                         </a>
                     </div>
 
@@ -51,6 +52,12 @@
                             </li>
                             <li class="nav-item">
                                 <a href="pagos_parciales_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Pagos parciales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="iglesias_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Iglesias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="historial_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Historial eventos</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Salir</a>

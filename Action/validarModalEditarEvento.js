@@ -259,24 +259,14 @@ function validarFormulario() {
     // Validar la fecha de inicio
     const fechaInicio = document.getElementById('fecha_inicio_evento_editar');
     const fechaInicioValida = document.getElementById('validarFechaInicio');
-    /* Convertir el valor de fecha de inicio a un objeto Date
-    Desglosar manualmente el valor de fecha en año, mes y día
-    Restamos 1 al mes, ya que en JavaScript los meses comienzan en 0 (enero es 0, diciembre es 11).*/ 
-    const partesFechaInicio = fechaInicio.value.split('-');
-    const fechaInicioValor = new Date(partesFechaInicio[0], partesFechaInicio[1] - 1, partesFechaInicio[2]);
-    // Fecha de hoy (solo la parte de la fecha sin horas)
-    const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0); // Reiniciar horas para que solo compare la fecha
+    // Convertimos a un objeto Date() si el campo no esta vacio
+    const fechaInicioValor = fechaInicio.value ? new Date(fechaInicio.value) : null;
     validarCampo(
         fechaInicio,
-        fechaInicio.value != '' && fechaInicioValor.getTime() >= hoy.getTime(),  // getTime(): Comparar los valores en milisegundos desde el 1 de enero de 1970
+        fechaInicio.value != '' && fechaInicioValor instanceof Date && !isNaN(fechaInicioValor),
         'Por favor, seleccione una fecha de inicio válida',
         fechaInicioValida
-    )
-
-    /*
-    TODO: Si la fecha es menor a la actual, eliminar los valores en fecha de inicio y de fin
-    */
+    );
 
     // Validad la fecha de fin
     const fechaFin = document.getElementById('fecha_fin_evento_editar');

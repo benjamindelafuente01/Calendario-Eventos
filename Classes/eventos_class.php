@@ -19,12 +19,8 @@
         // Método para traer los eventos
         public function traerEventos() {
 
-            // Sentencia SQL
-            $sql = "SELECT id_evento, nombre, fecha_inicio, hora_inicio, color, costo_boleto  
-                FROM evento
-                WHERE eliminado = false AND evento_finalizado = false
-                ORDER BY fecha_inicio ASC"
-            ;
+            // Sentencia SQL (Consultamos la vista que contiene todos los datos)
+            $sql = "SELECT * FROM vista_eventos_gastos_boletos ORDER BY fecha_inicio ASC";
 
             // Preparamos la consulta
             $stmt = $this->conexion_pdo->prepare($sql);

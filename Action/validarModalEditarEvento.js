@@ -30,8 +30,13 @@ function datosEventoAEditar(id) {
     })
 
     .catch(error => {
-        // Manejos de errores
-        console.error('Error al traer los datos del evento a editar:', error);
+        // Mensaje de error
+        Swal.fire({
+            title: "Ha ocurrido un error",
+            text: "Ocurrió un error al traer los datos del evento a editar",
+            icon: "error",
+            timer: 2000
+        });
     });
     // console.log('Se seleccionado el evento con el ID: ' + id);
 }
@@ -146,7 +151,7 @@ function validarCamposEventoEditar() {
         })
         .then(response => response.text()) // Leer la respuesta como texto
         .then(data => {
-            console.log('Respuesta del servidor (antes de JSON):', data);
+            // console.log('Respuesta del servidor (antes de JSON):', data);
 
             try {
                 // Intentar convertir la respuesta a JSON
@@ -180,13 +185,23 @@ function validarCamposEventoEditar() {
 
                 }
             } catch (e) {
-                console.error('Error al procesar JSON:', e);
-                alert('Hubo un error al procesar la respuesta del servidor. Intenta nuevamente.');
+                // Mensaje de error
+                Swal.fire({
+                    title: "Oops...",
+                    text: "Error al procesar la respuesta del servidor",
+                    icon: "error",
+                    timer: 2000
+                });
             }
         })
         .catch(error => {
-            console.error('Error al enviar los datos:', error);
-            alert('Hubo un error al enviar los datos al servidor. Intenta nuevamente.');
+            // Mensaje de error
+            Swal.fire({
+                title: "Oops...",
+                text: "Error al enviar los datos al servidor",
+                icon: "error",
+                timer: 2000
+            });
         });
 
     }

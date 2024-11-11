@@ -155,7 +155,7 @@ function validarCampos() {
         })
         .then(response => response.text()) // Leer la respuesta como texto
         .then(data => {
-            console.log('Respuesta del servidor (antes de JSON):', data);
+            // console.log('Respuesta del servidor (antes de JSON):', data);
 
             try {
                 // Intentar convertir la respuesta a JSON
@@ -189,13 +189,23 @@ function validarCampos() {
 
                 }
             } catch (e) {
-                console.error('Error al procesar JSON:', e);
-                alert('Hubo un error al procesar la respuesta del servidor. Intenta nuevamente.');
+                // Mensaje de error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error al procesar la respuesta del servidor",
+                    timer: 2000
+                });
             }
         })
         .catch(error => {
-            console.error('Error al enviar los datos:', error);
-            alert('Hubo un error al enviar los datos al servidor. Intenta nuevamente.');
+            // Mensaje de error
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Error al enviar los datos al servidor",
+                timer: 2000
+            });
         });
 
     }

@@ -72,11 +72,11 @@ function mostrarEventos(data) {
         // Color del evento
         let colorEvento = evento.color.toString();
         // Boletos vendidos
-        let boletosVendidos = 0;    // parseInt
+        let boletosVendidos = parseInt (evento.total_boletos_vendidos);
         // Ingresos
-        let ingresosEvento = 0;    // parseFloat()
+        let ingresosEvento = parseFloat (evento.total_boletos_pagados);
         // Gastos
-        let gastosEvento = 0       // parseFloat()
+        let gastosEvento = parseFloat (evento.total_gastos);
         // Calculamos el dinero recaudado
         let totalEvento =  ingresosEvento - gastosEvento;
 

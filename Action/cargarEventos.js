@@ -31,13 +31,18 @@ function traerEventos() {
    .then(response => response.json())
 
    .then(data => {
-        console.log(data);
+        // console.log(data);
         mostrarEventos(data);
    })
 
    .catch(error => {
-        // Manejos de errores
-        console.error('Error al traer los eventos:', error);
+        // Mensaje de error
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ocurrió un error al traer los eventos",
+            timer: 2000
+        });
    });
 
 }
@@ -363,7 +368,8 @@ function eliminarEvento(id) {
             })
             .then(response => response.text()) // Leer la respuesta como texto
             .then(data => {
-                console.log('Respuesta del servidor (antes de JSON):', data);
+                // console.log('Respuesta del servidor (antes de JSON):', data);
+
                 try {
                     // Intentar convertir la respuesta a JSON
                     let jsonData = JSON.parse(data);
@@ -393,14 +399,26 @@ function eliminarEvento(id) {
                     }
 
                 } catch (e) {
-                    console.error('Error al procesar JSON:', e);
-                    alert('Hubo un error al procesar la respuesta del servidor. Intenta nuevamente.');
+                    // console.error('Error al procesar JSON:', e);
+                    // Mensaje de error
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Error al procesar la respuesta del servidor",
+                        timer: 2000
+                    });
                 }
         
             })
             .catch(error => {
-                console.error('Error al enviar los datos:', error);
-                alert('Hubo un error al enviar los datos al servidor. Intenta nuevamente.');
+                // console.error('Error al enviar los datos:', error);
+                // Mensaje de error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error al enviar los datos",
+                    timer: 2000
+                });
             });
         }
     });
@@ -437,7 +455,8 @@ function finalizarEvento(id) {
             })
             .then(response => response.text()) // Leer la respuesta como texto
             .then(data => {
-                console.log('Respuesta del servidor (antes de JSON):', data);
+                // console.log('Respuesta del servidor (antes de JSON):', data);
+
                 try {
                     // Intentar convertir la respuesta a JSON
                     let jsonData = JSON.parse(data);
@@ -466,14 +485,26 @@ function finalizarEvento(id) {
                     }
 
                 } catch (e) {
-                    console.error('Error al procesar JSON:', e);
-                    alert('Hubo un error al procesar la respuesta del servidor. Intenta nuevamente.');
+                    // console.error('Error al procesar JSON:', e);
+                    // Mensaje de error
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Error al procesar la respuesta del servidor",
+                        timer: 2000
+                    });
                 }
         
             })
             .catch(error => {
-                console.error('Error al enviar los datos:', error);
-                alert('Hubo un error al enviar los datos al servidor. Intenta nuevamente.');
+                // console.error('Error al enviar los datos:', error);
+                // Mensaje de error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error al enviar los datos",
+                    timer: 2000
+                });
             });
         }
     });

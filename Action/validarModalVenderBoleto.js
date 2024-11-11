@@ -203,7 +203,8 @@ function validarFormularioVenderBoleto() {
         })
         .then(response => response.text()) // Leer la respuesta como texto
         .then(data => {
-            console.log('Respuesta del servidor (antes de JSON):', data);
+            // console.log('Respuesta del servidor (antes de JSON):', data);
+
             try {
                 // Intentar convertir la respuesta a JSON
                 let jsonData = JSON.parse(data);
@@ -244,7 +245,7 @@ function validarFormularioVenderBoleto() {
             }
         })
         .catch(error => {
-            console.error('Error al enviar los datos:', error);
+            // console.error('Error al enviar los datos:', error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

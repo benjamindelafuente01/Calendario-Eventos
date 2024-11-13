@@ -27,7 +27,7 @@
                             <div id="validarNombreBoleto" class=""></div>
                         </div>
                         <div class="col-md-6">
-                            <label for="iglesia_boleto" class="form-label fw-semibold">Delegados: </label>
+                            <label for="delegados_boleto" class="form-label fw-semibold">Delegados: </label>
                             <input class="form-control bg-white border-1 border-secondary" type="number" id="delegados_boleto" name="delegados_boleto" placeholder="Total de delegados" required>
                             <div id="validarDelegadosBoleto" class=""></div>
                         </div>

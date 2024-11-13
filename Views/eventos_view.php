@@ -54,7 +54,7 @@
                                 <a href="pagos_parciales_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Pagos parciales</a>
                             </li>
                             <li class="nav-item">
-                                <a href="iglesias_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Iglesias</a>
+                                <a href="distritos_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Distritos</a>
                             </li>
                             <li class="nav-item">
                                 <a href="historial_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Historial eventos</a>

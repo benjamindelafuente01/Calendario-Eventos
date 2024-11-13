@@ -18,25 +18,31 @@
         // Obtenemos los datos y sanitizamos
         $nombre = filter_var($_POST['nombre_boleto'], FILTER_SANITIZE_STRING);
         $distrito = filter_var($_POST['distrito_boleto'], FILTER_SANITIZE_STRING);
-        $iglesia = filter_var($_POST['iglesia_boleto'], FILTER_SANITIZE_STRING);
-        $precio_total = filter_var($_POST['precio_total_evento'], FILTER_SANITIZE_STRING);
+        $delegados = filter_var($_POST['delegados_boleto'], FILTER_SANITIZE_STRING);
+        $precio_evento = filter_var($_POST['precio_total_evento'], FILTER_SANITIZE_STRING);
         $precio_pagado = filter_var($_POST['monto_pagado_boleto'], FILTER_SANITIZE_STRING);
         $tipo_pago = filter_var($_POST['tipo_pago'], FILTER_SANITIZE_STRING);
         $id_evento = filter_var($_POST['evento_boleto'], FILTER_SANITIZE_STRING);
-        
+
         // Agregamos la fecha de venta de hoy
-        $fecha_venta = date("Y-m-d");
+        $fecha_venta = date("Y-m-d H:i:s");
         
         // TODO: Agregar usuario
         $usuario = 'Benjamin';
 
-        // Calculamos si se finiquito o no
+        // Calculamos campos de acuerdo al tipo de pago
         if ($tipo_pago == 'pago_completo') {
+            $precio_total = $precio_evento * $delegados;
             $finiquitado = true;
             $saldo_restante = 0;
         } else if ($tipo_pago == 'pago_parcial') {
+            $precio_total = $precio_evento * $delegados;
             $finiquitado = false;
             $saldo_restante = (float) ($precio_total - $precio_pagado);
+        } else if ($tipo_pago == 'pago_personalizado') {
+            $precio_total = $precio_pagado;
+            $finiquitado = true;
+            $saldo_restante = 0;
         }
 
         // Realizamos el registro del boleto vendido y del primer pago
@@ -48,7 +54,7 @@
             $idBoleto = $guardarBoleto->registrarBoleto(
                 $nombre,
                 $distrito,
-                $iglesia,
+                $delegados,
                 $precio_total,
                 $precio_pagado,
                 $saldo_restante,

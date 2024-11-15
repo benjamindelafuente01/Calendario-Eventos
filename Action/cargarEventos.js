@@ -172,6 +172,7 @@ function crearDropdown(id) {
     // Ruta de la imagen de editar
     const rutaImagenOpciones = '../Iconos/opciones.png';
     const rutaImagenEditar = '../Iconos/editar-evento.png';
+    const rutaImagenIngreso = '../Iconos/ingreso-evento.png';
     const rutaImagenGasto = '../Iconos/gasto-evento.png';
     const rutaImagenEliminar = '../Iconos/borrar-evento.png';
     const rutaImagenReporte = '../Iconos/reporte-evento.png';
@@ -226,6 +227,32 @@ function crearDropdown(id) {
     opcionEditar.appendChild(document.createTextNode('Editar'));
 
     /* 
+        Opcion reportar ingreso
+    */
+    let opcionIngreso = document.createElement('li');
+    opcionIngreso.classList.add('dropdown-item');
+      
+    // Asignamos data target al 'li' para que al hacer clic se active el modal
+    opcionIngreso.setAttribute('data-bs-toggle', 'modal');
+    opcionIngreso.setAttribute('data-bs-target', '#modalReportarIngreso');
+        
+    // Evento al hacer clic en el 'li'
+    opcionIngreso.addEventListener('click', function() {
+        escribirIdEventoEnIngreso(id);
+    });
+        
+    // Imagen de editar
+    let imagenIngreso = document.createElement('img');
+    imagenIngreso.setAttribute('src', `${rutaImagenIngreso}`);
+    imagenIngreso.setAttribute('height', '20');
+    imagenIngreso.setAttribute('width', '20');
+    imagenIngreso.classList.add('opciones-evento');
+       
+    // Añadir la imagen y el texto directamente al 'li'
+    opcionIngreso.appendChild(imagenIngreso);
+    opcionIngreso.appendChild(document.createTextNode('Agregar Ingreso'));
+
+    /* 
         Opcion reportar gasto
     */
     let opcionGasto = document.createElement('li');
@@ -249,7 +276,7 @@ function crearDropdown(id) {
     
     // Añadir la imagen y el texto directamente al 'li'
     opcionGasto.appendChild(imagenGasto);
-    opcionGasto.appendChild(document.createTextNode('Reportar gasto'));
+    opcionGasto.appendChild(document.createTextNode('Reportar Gasto'));
 
     /* 
         Opcion Generar reporte
@@ -324,6 +351,7 @@ function crearDropdown(id) {
 
     // Agregamos opciones al menu
     dropdownMenu.appendChild(opcionEditar);
+    dropdownMenu.appendChild(opcionIngreso);
     dropdownMenu.appendChild(opcionGasto);
     dropdownMenu.appendChild(opcionReporte);
     dropdownMenu.appendChild(opcionFinalizar);

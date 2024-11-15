@@ -79,7 +79,7 @@ function mostrarEventos(data) {
         // Boletos vendidos
         let boletosVendidos = parseInt (evento.total_boletos_vendidos);
         // Ingresos
-        let ingresosEvento = parseFloat (evento.total_boletos_pagados);
+        let ingresosEvento = parseFloat (evento.total_boletos_pagados) + parseFloat(evento.total_ingresos);
         // Gastos
         let gastosEvento = parseFloat (evento.total_gastos);
         // Calculamos el dinero recaudado

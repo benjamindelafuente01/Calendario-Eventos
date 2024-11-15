@@ -127,7 +127,7 @@ function validarFormularioIngreso()  {
         })
         .then(response => response.text())  // Leer la repsuesta como texto
         .then(data => {
-            console.log('Respuesta del servidor (antes de JSON):', data);
+            // console.log('Respuesta del servidor (antes de JSON):', data);
 
             try {
                 // Intentamos convertir la repsuesta a json

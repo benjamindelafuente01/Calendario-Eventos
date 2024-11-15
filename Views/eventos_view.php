@@ -92,6 +92,7 @@
         require ('../Modals/editarEvento_modal.php');
         require ('../Modals/agregarGasto_modal.php');
         require ('../Modals/venderBoleto_modal.php');
+        require ('../Modals/reportarIngreso_modal.php');
     ?>
 
 </body>

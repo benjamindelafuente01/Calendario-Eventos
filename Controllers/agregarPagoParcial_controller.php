@@ -26,7 +26,7 @@
         $saldoRestante = filter_var($_POST['saldo_restante_pago_parcial'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
         // Almacenamos fecha de registro del pago
-        $fechaPago = date('Y-m-d');
+        $fechaPago = date("Y-m-d H:i:s");
 
         // TODO: Agregamos usuario
         $usuario = 'Benjamin';

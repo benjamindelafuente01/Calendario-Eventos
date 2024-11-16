@@ -167,6 +167,32 @@
             
             return $resultado;
         }
+
+
+        // Metodo para agregar un ingreso
+        public function agregarIngreso($tipo_ingreso, $monto_ingreso, $fecha_ingreso, $usuario, $id_evento) {
+
+            // Sentencia SQL
+            $sql = "INSERT INTO ingreso(tipo_ingreso, monto_ingreso, fecha_ingreso, usuario, id_evento)
+                VALUES(:TIPO_INGRESO, :MONTO_INGRESO, :FECHA_INGRESO, :USUARIO, :ID_EVENTO)"
+            ;
+
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos valores
+            $marcadores = [':TIPO_INGRESO' => $tipo_ingreso, ':MONTO_INGRESO' => $monto_ingreso, ':FECHA_INGRESO' => $fecha_ingreso,
+                ':USUARIO' => $usuario, ':ID_EVENTO' => $id_evento    
+            ];
+
+            // Ejecutamos consulta
+            $stmt->execute($marcadores);
+
+            // Verificamos resultado
+            $resultado = $stmt->rowCount() > 0 ? true : false;
+
+            return $resultado;
+        }
     }
 
 ?>

@@ -27,18 +27,16 @@
                             <div id="validarNombreBoleto" class=""></div>
                         </div>
                         <div class="col-md-6">
-                            <label for="iglesia_boleto" class="form-label fw-semibold">Iglesia: </label>
-                            <select class="form-select" id="iglesia_boleto" name="iglesia_boleto">
-                                <option selected>Elige la iglesia</option>
-                            </select>
-                            <div id="validarIglesiaBoleto" class=""></div>
+                            <label for="delegados_boleto" class="form-label fw-semibold">Delegados: </label>
+                            <input class="form-control bg-white border-1 border-secondary" type="number" id="delegados_boleto" name="delegados_boleto" placeholder="Total de delegados" required>
+                            <div id="validarDelegadosBoleto" class=""></div>
                         </div>
                     </div>
 
                     <div class="row g-3 mt-2">
                         <div class="col-md-6">
                             <label for="distrito_boleto" class="form-label fw-semibold">Distrito: </label>
-                            <select class="form-select select-distrito" id="distrito_boleto" name="distrito_boleto">
+                            <select class="form-select" id="distrito_boleto" name="distrito_boleto">
                                 <option selected>Elige el distrito</option>
                             </select>
                             <div id="validarDistritoBoleto" class=""></div>
@@ -59,6 +57,8 @@
                             <label for="pago_completo">Pago completo</label> <br>
                             <input class="form-check-input" type="radio" id="pago_parcial" name="tipo_pago" value="pago_parcial">
                             <label for=" pago_parcial">Pago parcial</label> <br>
+                            <input class="form-check-input" type="radio" id="pago_personalizado" name="tipo_pago" value="pago_personalizado">
+                            <label for=" pago_personalizado">Pago personalizado</label> <br>
                             <div id="validarTipoPagoBoleto" class=""></div>
                         </div>
                         <div class="col-md-6">

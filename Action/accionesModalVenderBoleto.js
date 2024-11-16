@@ -10,17 +10,16 @@
 document.getElementById('modalVenderBoleto').addEventListener('shown.bs.modal', function () {
 
     // Traemos los datos
-    cargarOpcionesSelectBoleto('iglesia', 'iglesia_boleto', '../Controllers/Boletos/traerIglesias_controller.php');
     cargarOpcionesSelectBoleto('distrito', 'distrito_boleto', '../Controllers/Boletos/traerDistritos_controller.php');
     cargarOpcionesSelectBoleto('evento', 'evento_boleto', '../Controllers/Boletos/traerEventos_controller.php');
 })
 
 
 /*
-    Evento para cuando se seleccione una iglesia se eliga el distrito
+    Evento para actualizar el monto cuando se escriba el total de delegados
 */
-document.getElementById('iglesia_boleto').addEventListener('change', function () {
-    actualizarDistritoPorIglesia();
+document.getElementById('delegados_boleto').addEventListener('input', function () {
+    actualizarMontoPorDelegado();
 });
 
 
@@ -69,14 +68,7 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
                 let opcionSelect = document.createElement('option');
                     
                 // Según el tipo de opción, almacenamos diferentes valores
-                if (opcion === 'iglesia') {
-                    // Almacenamos nombre de la iglesia
-                    opcionSelect.value = elemento.nombre;
-                    // Escribimos valor
-                    opcionSelect.text = elemento.nombre
-                    // Asociamos el id del distrito al que pertenece la iglesia como un data attribute
-                    opcionSelect.dataset.distritoDeIglesia = elemento.id_distrito;
-                } else if (opcion === 'distrito') {
+                if (opcion === 'distrito') {
                     // Almacenamos nombre del distrito
                     opcionSelect.value = elemento.nombre;
                     // Escribimos valor
@@ -125,7 +117,7 @@ function cargarOpcionesSelectBoleto(opcion, idSelect, ruta) {
 
 
 /*
-    Function para actualizar el distrito cuando se eliga una iglesia
+    Function para actualizar el distrito cuando se eliga una iglesia (ya no se usa pero se queda de ejemplo)
 */
 function actualizarDistritoPorIglesia() {
 
@@ -156,6 +148,31 @@ function actualizarDistritoPorIglesia() {
 
 
 /*
+    Function para actualizar el monto a pagar por delegados
+*/
+function actualizarMontoPorDelegado() {
+
+    // Obtenemos el total de delegados que se esta ingresando
+    let totalDelegados = document.getElementById('delegados_boleto').value;
+    // Obtenemos el select de los eventos
+    let eventoSelect = document.getElementById('evento_boleto');
+    // Obtenemos el precio del evento seleccionado
+    let precioEvento = eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento;
+    // Obtenemos el campo de monto a pagar
+    let montoInput = document.getElementById('monto_pagado_boleto');
+
+    // Si ya se ingreso el total de delegados, establecemos el total a pagar como placeholder
+    if (totalDelegados && totalDelegados > 0) {
+        // Establecemos precio del evento x total de delegados
+        montoInput.placeholder = precioEvento * totalDelegados;
+    } else {
+        // Sino solo establecemos el precio del boleto individual
+        montoInput.placeholder = precioEvento;
+    }
+}
+
+
+/*
     Function para escribir el precio cuando se eliga un evento
 */
 function actualizarPagoPorEvento() {
@@ -168,6 +185,8 @@ function actualizarPagoPorEvento() {
     let montoValido = document.getElementById('validarMontoPagadoBoleto');
     // Obtenemos el precio del evento seleccionado
     let precioEvento = eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento;
+    // Obtenemos el total de delegados
+    let totalDelegados = document.getElementById('delegados_boleto').value;
     // Obtetenemos los botones del tipo de pago
     let botonesTipoPago = document.getElementsByName('tipo_pago');
     // Obtenemos el input oculto del precio total del evento
@@ -175,8 +194,16 @@ function actualizarPagoPorEvento() {
 
     // Limpiamos input del monto ingresado
     montoInput.value = '';
-    // Establecemos precio como placeholder
-    montoInput.placeholder = precioEvento;
+
+    // Si ya se ingreso el total de delegados, establecemos el total a pagar como placeholder
+    if (totalDelegados && totalDelegados > 0) {
+        // Establecemos precio del evento x total de delegados
+        montoInput.placeholder = precioEvento * totalDelegados;
+    } else {
+        // Sino solo establecemos el precio del boleto individual
+        montoInput.placeholder = precioEvento;
+    }
+
     // En caso de estar desactivado, activamos
     montoInput.readOnly = false;
     // Eliminamos cualquier clase de error del input
@@ -211,11 +238,19 @@ function ajustarMontoPorTipoPago() {
     let eventoSelect = document.getElementById('evento_boleto');
     // Obtenemos el precio del evento seleccionado
     let precioEvento = parseInt(eventoSelect.options[eventoSelect.selectedIndex].dataset.precioEvento);
+    // Obtenemos el total de delegados
+    let totalDelegados = document.getElementById('delegados_boleto').value;
 
     // Verificamos la opcion seleccionada
     if (tipoPagoSeleccionado == 'pago_completo') {
-        // Establecemos el precio del boleto
-        montoInput.value = precioEvento;
+        // Si ya se ingreso el total de delegados, establecemos el precio del boleto
+        if (totalDelegados && totalDelegados > 0) {
+            // Establecemos precio del evento x total de delegados
+            montoInput.value = precioEvento * totalDelegados;
+        } else {
+            // Sino solo establecemos el precio del boleto individual
+            montoInput.value = precioEvento;
+        }
         // Ponemos en solo lectura
         montoInput.readOnly = true;
         // Eliminamos clase de error del input
@@ -230,6 +265,28 @@ function ajustarMontoPorTipoPago() {
         montoInput.value = '';
         // Desactivamos modo lectura
         montoInput.readOnly = false;
+        // Si ya se ingreso el total de delegados, establecemos el total a pagar como placeholder
+        if (totalDelegados && totalDelegados > 0) {
+            // Establecemos precio del evento x total de delegados
+            montoInput.placeholder = precioEvento * totalDelegados;
+        } else {
+            // Sino solo establecemos el precio del boleto individual
+            montoInput.placeholder = precioEvento;
+        }
+    
+    } else if (tipoPagoSeleccionado == 'pago_personalizado') {
+        // Limpiamos el input
+        montoInput.value = '';
+        // Agregamos mensaje de pago personalizado
+        montoInput.placeholder = 'Escribe la cantidad';
+        // Desactivamos modo lectura
+        montoInput.readOnly = false;
+        // Eliminamos clase de error del input
+        montoInput.classList.remove('is-invalid');
+        // Eliminamos mensaje de error del div de validacion
+        montoValido.innerHTML = '';
+        // Eliminamos clase de error del div de validacion
+        montoValido.classList.remove('invalid-feedback');
     }
 
 }

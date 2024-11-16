@@ -40,30 +40,6 @@
         }
 
 
-        // Método para traer las iglesias
-        public function consultarIglesias() {
-
-            // Consulta sql
-            $sql = "SELECT id_iglesia, nombre, id_distrito FROM iglesia";
-
-            // Preparamos consulta
-            $stmt = $this->conexion_pdo->prepare($sql);
-
-            // Ejecutamos consulta
-            $stmt->execute();
-
-            // Guardamos resultados
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Verificamos resultado
-            if (!$resultado) {
-                return false;
-            } else {
-                return $resultado;
-            }
-        }
-
-
         // Método para traer los eventos
         public function consultarEventos() {
 
@@ -113,19 +89,19 @@
 
 
         // Metodo para registrar la venta de un nuevo boleto
-        public function registrarBoleto($nombre, $distrito, $iglesia, $precioTotal, $precioPagado, $saldoRestante, $finiquitado, $fechaVenta, $usuario, $idEvento) {
+        public function registrarBoleto($nombre, $distrito, $delegados, $precioTotal, $precioPagado, $saldoRestante, $finiquitado, $fechaVenta, $usuario, $idEvento) {
 
             // Consulta sql
             $sql = "INSERT INTO boleto (
-                    nombre, distrito, iglesia, precio_total, precio_pagado, saldo_restante, finiquitado, fecha_venta, usuario, id_evento)
-                    VALUES (:NOMBRE, :DISTRITO, :IGLESIA, :PRECIO_TOTAL, :PRECIO_PAGADO, :SALDO_RESTANTE, :FINIQUITADO, :FECHA_VENTA, :USUARIO, :ID_EVENTO)"
+                    nombre, distrito, total_delegados, precio_total, precio_pagado, saldo_restante, finiquitado, fecha_venta, usuario, id_evento)
+                    VALUES (:NOMBRE, :DISTRITO, :DELEGADOS, :PRECIO_TOTAL, :PRECIO_PAGADO, :SALDO_RESTANTE, :FINIQUITADO, :FECHA_VENTA, :USUARIO, :ID_EVENTO)"
             ;
 
             // Preparamos la consulta
             $stmt = $this->conexion_pdo->prepare($sql);
 
             // Asociamos los valores
-            $marcadores = [':NOMBRE' => $nombre, ':DISTRITO' => $distrito, ':IGLESIA' => $iglesia, ':PRECIO_TOTAL' => $precioTotal, ':PRECIO_PAGADO' => $precioPagado,
+            $marcadores = [':NOMBRE' => $nombre, ':DISTRITO' => $distrito, ':DELEGADOS' => $delegados, ':PRECIO_TOTAL' => $precioTotal, ':PRECIO_PAGADO' => $precioPagado,
                 ':SALDO_RESTANTE' => $saldoRestante, ':FINIQUITADO' => $finiquitado, ':FECHA_VENTA' => $fechaVenta, ':USUARIO' => $usuario, ':ID_EVENTO' => $idEvento
             ];
 

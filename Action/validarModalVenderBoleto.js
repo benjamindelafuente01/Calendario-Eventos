@@ -10,10 +10,10 @@
 function vaciarModalVenderBoleto() {
 
     // Arreglo con los inputs
-    const campos = ['nombre_boleto', 'monto_pagado_boleto'];
+    const campos = ['nombre_boleto', 'monto_pagado_boleto', 'delegados_boleto'];
 
     // Arreglo con los divs
-    const validaciones = ['validarNombreBoleto', 'validarMontoPagadoBoleto'];
+    const validaciones = ['validarNombreBoleto', 'validarTipoPagoBoleto', 'validarMontoPagadoBoleto', 'validarDelegadosBoleto'];
     
     // Limpiamos inputs
     campos.forEach(idCampo => {
@@ -90,6 +90,30 @@ function validarCamposVenderBoleto() {
         // Marcamos el formulario como inválido
         formularioValido = false;
     }
+
+
+    /****************************************************************
+    *           Validar el total de delegados del boleto            *
+    ****************************************************************/
+    let delegadosBoleto = document.getElementById('delegados_boleto');
+    let delegadosValido = document.getElementById('validarDelegadosBoleto');
+
+    // Solo numeros mayores que cero
+    if (/^[1-9]\d*$/.test(delegadosBoleto.value.trim())) {
+        // Si es correcta, eliminamos cualquier mensaje de error
+        delegadosBoleto.classList.remove('is-invalid');
+        delegadosValido.innerHTML = '';
+        delegadosValido.classList.remove('invalid-feedback');
+    
+    } else {
+        // Añadimos mensajes de errores
+        delegadosBoleto.classList.add('is-invalid');
+        delegadosValido.innerHTML = 'Por favor, ingresa un número valido mayor que cero';
+        delegadosValido.classList.add('invalid-feedback');
+
+        // Marcamos el formulario como inválido
+        formularioValido = false;
+    }
         
 
     /****************************************************************
@@ -152,8 +176,8 @@ function validarCamposVenderBoleto() {
 
                 formularioValido = false;
                 
-            // Verificamos que el monto ingresado sea menor al costo del boleto del evento
-            } else if (precioEvento <= montoPagoParcial) {
+            // Verificamos que el monto ingresado sea menor al costo del boleto del evento * total de delegados
+            } else if ((precioEvento * delegadosBoleto.value) <= montoPagoParcial) {
                 montoBoleto.classList.add('is-invalid');
                 montoValido.innerHTML = 'El pago parcial debe ser menor al costo del boleto.';
                 montoValido.classList.add('invalid-feedback')
@@ -166,7 +190,24 @@ function validarCamposVenderBoleto() {
                 montoValido.innerHTML = '';
                 montoValido.classList.remove('invalid-feedback');
             }
+        
+        // Si se selecciono un pago personalizado
+        } else if (tipoPagoSeleccionado == 'pago_personalizado') {
 
+            // Verificamos que no sea cero o una cadena vacía
+            if (montoPagoParcial == 0 || montoPagoParcial < 0) {
+                montoBoleto.classList.add('is-invalid');
+                montoValido.innerHTML = 'Por favor, ingresa un monto mayor que cero.';
+                montoValido.classList.add('invalid-feedback')
+
+                formularioValido = false;
+
+            } else {
+                // Si es correcto, eliminamos cualquier mensaje de error
+                montoBoleto.classList.remove('is-invalid');
+                montoValido.innerHTML = '';
+                montoValido.classList.remove('invalid-feedback');
+            }
         }
     }
 

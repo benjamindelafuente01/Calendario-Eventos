@@ -112,7 +112,7 @@
 
     <?php
         require ('../Modals/agregarDistrito_modal.php');
-        // require ('../Modals/editarDistrito_modal.php');
+        require ('../Modals/editarDistrito_modal.php');
     ?>
 
 </body>

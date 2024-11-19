@@ -62,7 +62,33 @@
                 return $resultado;
             }
         }
-    }
 
+
+        // Metodo para actualizar el nombre de un distrito
+        public function actualizarDistrito($id_distrito, $nombre_distrito) {
+
+            // Sentencia SQL
+            $sql = "UPDATE distrito
+                SET nombre = :NOMBRE_DISTRITO
+                WHERE id_distrito = :ID_DISTRITO"
+            ;
+
+            // Preparamos consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Asociamos valores
+            $stmt->bindParam(':ID_DISTRITO', $id_distrito);
+            $stmt->bindParam(':NOMBRE_DISTRITO', $nombre_distrito);
+
+            // Ejecutamos consulta
+            $stmt->execute();
+
+            // Verificamos resultado
+            $resultado = $stmt->rowCount() > 0 ? true : false;
+
+            return $resultado;
+        }
+
+    }
 
 ?>

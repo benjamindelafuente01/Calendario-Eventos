@@ -38,6 +38,30 @@
 
             return $resultado;
         }
+
+
+        // Metodo para consultar los distritos
+        public function consultarDistritos() {
+
+            // Sentencia SQL
+            $sql = "SELECT id_distrito, nombre FROM distrito";
+
+            // Preparamos la consulta
+            $stmt = $this->conexion_pdo->prepare($sql);
+
+            // Ejecutamos la consulta
+            $stmt->execute();
+
+            // Guardamos resultado
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Verificamos resultado
+            if (!$resultado) {
+                return false;
+            } else {
+                return $resultado;
+            }
+        }
     }
 
 

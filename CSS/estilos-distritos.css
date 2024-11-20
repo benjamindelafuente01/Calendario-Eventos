@@ -1,0 +1,42 @@
+.btn-close-white {
+    filter: invert(1);
+}
+
+/*
+    Media queries para la tabla
+*/
+
+@media (max-width: 768px) {
+    .contenedor-tablaDistritos {
+      width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .contenedor-tablaDistritos {
+      width: 50%;
+    }
+}
+
+/*
+    Estilos de la tabla
+*/
+
+table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #45469A  !important;
+    color: #ffff !important;
+}

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distritos</title>
     <link rel="stylesheet" href="../BootStrap 5.3.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../CSS/estilos-eventos.css">
+    <link rel="stylesheet" href="../CSS/estilos-distritos.css">
 </head>
 
 <body class="bg-info-subtle d-flex justify-content-center">
@@ -76,7 +76,7 @@
     <!---------------------------------------->
     <!--      Contenedor de la pagina       -->
     <!---------------------------------------->
-    <div class="mt-5 mb-5 w-50">
+    <div class="mt-5 mb-5 w-100">
 
         <!-- Contenedor de formulario y tabla -->
         <div class="container my-5 ">
@@ -87,18 +87,20 @@
             </div>
 
             <!-- Tabla de Distritos -->
-            <div class="table-responsive mt-4" id="contenedorTablaDistritos">
-                <table class="table table-striped" id="tablaDistritos">
-                    <thead>
-                        <tr>
-                            <th>Nombre Distrito</th>
-                            <th colspan="2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultadosDistritos">
-                        <!-- Aqui iran las filas -->
-                    </tbody>
-                </table>
+            <div class="d-flex justify-content-center mt-4">
+                <div class="table-responsive mt-4 contenedor-tablaDistritos" id="contenedorTablaDistritos">
+                    <table class="table table-striped" id="tablaDistritos">
+                        <thead>
+                            <tr>
+                                <th>Nombre distrito</th>
+                                <th colspan="2">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultadosDistritos">
+                            <!-- Aqui se agregaran las filas -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>

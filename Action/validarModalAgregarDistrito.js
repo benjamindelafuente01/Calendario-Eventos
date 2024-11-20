@@ -112,7 +112,7 @@ function validarFormularioAgregarDistrito() {
         })
         .then(response => response.text()) // Leer la respuesta como texto
         .then(data => {
-            console.log('Respuesta del servidor (antes de JSON):', data);
+            // console.log('Respuesta del servidor (antes de JSON):', data);
 
             try {
                 // Intentar convertir la respuesta a JSON

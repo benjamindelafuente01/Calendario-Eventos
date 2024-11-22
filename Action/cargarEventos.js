@@ -276,7 +276,7 @@ function crearDropdown(id) {
     
     // Añadir la imagen y el texto directamente al 'li'
     opcionGasto.appendChild(imagenGasto);
-    opcionGasto.appendChild(document.createTextNode('Reportar Gasto'));
+    opcionGasto.appendChild(document.createTextNode('Agregar Gasto'));
 
     /* 
         Opcion Generar reporte
@@ -284,14 +284,10 @@ function crearDropdown(id) {
     let opcionReporte = document.createElement('li');
     opcionReporte.classList.add('dropdown-item');
    
-    // Asignamos data target al 'li' para que al hacer clic se active el modal
-    // opcionReporte.setAttribute('data-bs-toggle', 'modal');
-    // opcionReporte.setAttribute('data-bs-target', '#modalEditarEvento');
-   
     // Evento al hacer clic en el 'li'
-    // opcionReporte.addEventListener('click', function() {
-    //     datosEventoAEditar(id);
-    // });
+    opcionReporte.addEventListener('click', function() {
+        generarReporteGastos(id);
+    });
    
     // Imagen de reporte
     let imagenReporte = document.createElement('img');
@@ -302,7 +298,7 @@ function crearDropdown(id) {
    
     // Añadir la imagen y el texto directamente al 'li'
     opcionReporte.appendChild(imagenReporte);
-    opcionReporte.appendChild(document.createTextNode('Generar Reporte'));
+    opcionReporte.appendChild(document.createTextNode('Reporte Gastos'));
 
     /* 
         Opcion Finalizar evento

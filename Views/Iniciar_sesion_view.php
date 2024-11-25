@@ -8,8 +8,8 @@
     <style>
         .logo-container {
             position: absolute;
-            top: 20px;      /* Colocar el logo en la parte superior */
-            right: 20px;    /* Colocar el logo en la parte derecha */
+            top: 20px;
+            right: 20px;
         }
     </style>
 </head>
@@ -26,7 +26,7 @@
         <div class="text-center fs-1 fw-bold">Iniciar sesión</div>
 
         <!-- Inicia formulario del login -->
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <form action="../Controllers/iniciarSesion_controller.php" method="POST">
 
             <!-- Contenedor de correo -->
             <div class="input-group mt-4">

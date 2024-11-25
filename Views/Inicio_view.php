@@ -1,3 +1,17 @@
+<?php
+
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -58,17 +72,17 @@
                             <li class="nav-item">
                                 <a href="distritos_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Distritos</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="historial_view.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Historial eventos</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
-                                <a href="#" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Salir</a>
+                                <a href="../Controllers/cerrarSesion_controller.php" class="nav-link active text-white fw-semibold" style="font-size: 1.3rem">Salir</a>
                             </li>
                         </ul>
-                        <form class="d-flex mt-3" role="search">
+                        <!-- <form class="d-flex mt-3" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>

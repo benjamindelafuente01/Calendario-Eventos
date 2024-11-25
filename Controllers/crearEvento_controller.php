@@ -1,5 +1,16 @@
 <?php
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos el archivo de la clase que inserta un nuevo evento
     require __DIR__ . '/../Classes/inicio_class.php';
 
@@ -23,8 +34,8 @@
 
         // Valor de hoy (fecha en que se creó)
         $fecha_creacion = date("Y-m-d H:i:s");
-        // TODO: Valor temporal del usuario
-        $usuario = 'Benjamin';
+        // Accedemos al usuario de la sesion
+        $usuario = $_SESSION['usuario'];
 
         /*
             Enviamos datos del evento a la base de datos

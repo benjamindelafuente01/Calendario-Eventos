@@ -1,5 +1,16 @@
 <?php
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase
     require __DIR__ . '/../Classes/boletos_class.php';
 
@@ -27,8 +38,8 @@
         // Agregamos la fecha de venta de hoy
         $fecha_venta = date("Y-m-d H:i:s");
         
-        // TODO: Agregar usuario
-        $usuario = 'Benjamin';
+        // Accedemos al usuario de la sesion
+        $usuario = $_SESSION['usuario'];
 
         // Calculamos campos de acuerdo al tipo de pago
         if ($tipo_pago == 'pago_completo') {

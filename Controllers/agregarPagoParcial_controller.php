@@ -4,6 +4,17 @@
         Controlador para agregar un pago parcial. Recibe los datos de un nuevo pago y guardamos, asi como
         actualizamos datos del boleto
     */
+
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
     
     // Importamos clase de conexion
     require __DIR__ . '/../Classes/pagos_class.php';
@@ -28,8 +39,8 @@
         // Almacenamos fecha de registro del pago
         $fechaPago = date("Y-m-d H:i:s");
 
-        // TODO: Agregamos usuario
-        $usuario = 'Benjamin';
+        // Accedemos al usuario de la sesion
+        $usuario = $_SESSION['usuario'];
 
         // Verificamos si se realizo el pago completo
         $finiquitado = $montoAbonado == $saldoRestante ? true : false;

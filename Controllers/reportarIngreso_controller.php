@@ -4,6 +4,17 @@
         Controlador que recibe el monto de un ingreso y lo agrega a base de datos
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos archivo de conexion
     require __DIR__ . '/../Classes/eventos_class.php';
 
@@ -27,8 +38,8 @@
         // Almacenamos fecha de registro de ingreso
         $fecha_ingreso = date('Y-m-d H:i:s');
 
-        // TODO: Agregamos usuario
-        $usuario = 'Benjamin';
+        // Accedemos al usuario de la sesion
+        $usuario = $_SESSION['usuario'];
 
         // Guardamos ingreso
         $agregarIngreso = $ingreso->agregarIngreso($tipo_ingreso, $monto_ingreso, $fecha_ingreso, $usuario, $id_evento);

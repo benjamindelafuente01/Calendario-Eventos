@@ -5,6 +5,17 @@
         los datos para enviarlos de regreso y que se puedan editar
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos la clase donde se consulta el evento
     require __DIR__ . '/../Classes/eventos_class.php';
     

@@ -4,6 +4,17 @@
         Controlador para guardar un nuevo gasto generado
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase con el metodo para guardar gasto
     require __DIR__ . '/../Classes/eventos_class.php';
     
@@ -19,8 +30,8 @@
         $monto = filter_var($_POST['monto_gasto'], FILTER_SANITIZE_STRING);
         $fecha = filter_var($_POST['fecha_gasto'], FILTER_SANITIZE_STRING);
 
-        // TODO: Agregar usuario
-        $usuario = 'Benjamin';
+        // Accedemos al usuario de la sesion
+        $usuario = $_SESSION['usuario'];
 
         // Instanciamos objeto de la clase
         $gasto = new Eventos();

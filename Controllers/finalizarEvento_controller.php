@@ -4,6 +4,17 @@
         Controlador que recibe el ID del evento que se desea finalizar
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase
     require __DIR__ . '/../Classes/eventos_class.php';
 

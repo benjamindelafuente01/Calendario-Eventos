@@ -4,6 +4,17 @@
         Controlador para  generar reportes de los gastos del evento seleccionado
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase para la consulta
     require __DIR__ . '/../Classes/reportes_class.php';
     

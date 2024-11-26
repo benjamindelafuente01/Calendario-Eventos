@@ -4,6 +4,17 @@
         Controlador para realizar la busqueda de los boletos pendientes que consulto el usuario
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase
     require __DIR__ . '/../Classes/pagos_class.php';
 

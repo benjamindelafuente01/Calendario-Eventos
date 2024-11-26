@@ -1,5 +1,16 @@
 <?php
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos modelo
     require __DIR__ . '/../Classes/eventos_class.php';
 
@@ -23,8 +34,8 @@
 
         // Valor de hoy (fecha en que se actualizo)
         $fecha_actualizacion = date("Y-m-d H:i:s");
-        // TODO: Valor temporal del usuario
-        $usuario = 'Benjamin';
+        // Accedemos al usuario de la sesion
+        $usuario = $_SESSION['usuario'];
 
         /*
             Enviamos datos actualizados

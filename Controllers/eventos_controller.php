@@ -4,6 +4,17 @@
         Controlador para solicitar los todos los eventos y mostrarlos en el menu de eventos
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos arhivo con clase que hace la petición de los eventos
     require __DIR__ . '/../Classes/eventos_class.php';
 

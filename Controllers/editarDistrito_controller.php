@@ -4,6 +4,17 @@
         Controlador para actualizar el nombre de un distrito
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase con el metodo para guardar gasto
     require __DIR__ . '/../Classes/distritos_class.php';
     

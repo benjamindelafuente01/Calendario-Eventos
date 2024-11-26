@@ -3,6 +3,17 @@
         Controlador para traer los distritos existentes
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos clase de distritos
     require __DIR__ . '/../Classes/distritos_class.php';
 

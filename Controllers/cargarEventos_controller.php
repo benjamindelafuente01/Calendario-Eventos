@@ -6,6 +6,17 @@
         formato que la vista puede recibir.
     */
 
+    // Iniciamos o reanudamos la sesion
+    session_start();
+
+    // Verificamos si hay una sesion activa
+    if (!isset($_SESSION['usuario'])) {
+
+        // Reedirigimos al index
+        header('Location: ../index.php');
+        exit();
+    }
+
     // Importamos el archivo de la clase que inserta un nuevo evento
     require __DIR__ . '/../Classes/inicio_class.php';
 

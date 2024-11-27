@@ -29,19 +29,19 @@
         <!--     Contenedor del formulario      -->
         <!---------------------------------------->
         <div class="mx-4 fs-1px">
-            <form  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+            <form  action="../Controllers/recuperarContra_controller.php" method="POST">
 
                 <!-- Fila Correo y Respuesta secreta -->
                 <div class="row g-3 mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="correo_recuperacion" class="form-label fw-semibold">Correo electrónico: </label>
                         <input class="form-control bg-light" type="email" id="correo_recuperacion" name="correo_recuperacion" placeholder="" required>
                     </div>
                     
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="respuesta_recuperacion" class="form-label fw-semibold">Respuesta de pregunta secreta: </label>
                         <input class="form-control bg-light" type="text" id="respuesta_recuperacion" name="respuesta_recuperacion" placeholder="" required>
-                    </div>
+                    </div> -->
 
                 </div>
 

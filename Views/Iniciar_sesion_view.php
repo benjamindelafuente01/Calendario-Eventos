@@ -14,7 +14,8 @@
     </style>
 </head>
 
-<body class="bg-info-subtle d-flex justify-content-center vh-100 position-relative">
+<!-- <body class="bg-info-subtle d-flex justify-content-center vh-100 position-relative"> -->
+<body class="bg-info-subtle d-flex justify-content-center align-items-center vh-100 position-relative flex-column">
 
 
     <!-- Contenedor de los elementos -->
@@ -68,23 +69,23 @@
         </form>
 
         <!-- Contenedor registrarse -->
-        <div class="d-flex gap-1 justify-content-center mt-1">
+        <!-- <div class="d-flex gap-1 justify-content-center mt-1">
             <div>¿No tienes una cuenta?</div>
             <a href="Registrar_cuenta_view.php" class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-primary fw-semibold">Regístrate</a>
-        </div>
+        </div> -->
 
         <!-- Contenedor de 'o' -->
-        <div class="p-2">
+        <!-- <div class="p-2">
             <div class="border-bottom text-center" style="height: 0.9rem">
                 <span class="bg-white px-3">ó</span>
             </div>
-        </div>
+        </div> -->
 
         <!-- Contenedor iniciar con google -->
-        <div class="btn d-flex gap-2 justify-content-center border shadow-sm mt-3">
+        <!-- <div class="btn d-flex gap-2 justify-content-center border shadow-sm mt-3">
             <img src="../Iconos/google-icon.svg" alt="google-icon" title="No disponible por el momento" height="25rem">
             <div class="fw-semibold text-secondary">Continuar con Google</div>
-        </div>
+        </div> -->
 
     </div>
 
